@@ -45,19 +45,9 @@ public class MainActivity extends AppCompatActivity {
         mSlideViewPager.addOnPageChangeListener(viewListener);
 
         //OnclickListeners for Buttons
-        mNextBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mSlideViewPager.setCurrentItem(mCurrentPage+1);
-            }
-        });
+        mNextBtn.setOnClickListener(v -> mSlideViewPager.setCurrentItem(mCurrentPage+1));
 
-        mBackBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mSlideViewPager.setCurrentItem(mCurrentPage - 1);
-            }
-        });
+        mBackBtn.setOnClickListener(v -> mSlideViewPager.setCurrentItem(mCurrentPage - 1));
     }
 
 
@@ -106,12 +96,9 @@ public class MainActivity extends AppCompatActivity {
 
                 mNextBtn.setText("Finish");
                 mBackBtn.setText("Back");
-                mNextBtn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent mPreferenceIntent = new Intent(MainActivity.this, MusicPreferenceActivity.class);
-                        startActivity(mPreferenceIntent);
-                    }
+                mNextBtn.setOnClickListener(v -> {
+                    Intent mPreferenceIntent = new Intent(MainActivity.this, MusicPreferenceActivity.class);
+                    startActivity(mPreferenceIntent);
                 });
             }else {
 
