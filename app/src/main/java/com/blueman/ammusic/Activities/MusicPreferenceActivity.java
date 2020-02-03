@@ -146,5 +146,6 @@ public class MusicPreferenceActivity extends AppCompatActivity implements View.O
                     default:
 
                 }
+                mContinue.setOnClickListener(this::onClick);
             }
     }
