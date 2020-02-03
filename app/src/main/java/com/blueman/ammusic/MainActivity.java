@@ -3,6 +3,7 @@ package com.blueman.ammusic;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.blueman.ammusic.Activities.MusicPreferenceActivity;
 import com.blueman.ammusic.Adapters.SliderAdapter;
 
 import butterknife.BindView;
@@ -104,6 +106,13 @@ public class MainActivity extends AppCompatActivity {
 
                 mNextBtn.setText("Finish");
                 mBackBtn.setText("Back");
+                mNextBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent mPreferenceIntent = new Intent(MainActivity.this, MusicPreferenceActivity.class);
+                        startActivity(mPreferenceIntent);
+                    }
+                });
             }else {
 
                 mBackBtn.setEnabled(true);
