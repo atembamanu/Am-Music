@@ -6,6 +6,7 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,6 +21,10 @@ import butterknife.ButterKnife;
 public class MusicPreferenceActivity extends AppCompatActivity implements View.OnClickListener {
 
     //buttons
+    @BindView(R.id.mcontinue) Button mContinue;
+    @BindView(R.id.skip) Button mSkip;
+
+    //Textviews in cards
     @BindView(R.id.card_mGospel) TextView mGospel;
     @BindView(R.id.card_mReggae) TextView mReggae;
     @BindView(R.id.card_mRumba) TextView mRumba;
@@ -33,7 +38,12 @@ public class MusicPreferenceActivity extends AppCompatActivity implements View.O
     @BindView(R.id.card_mInstrumental) TextView mInstrumental;
     @BindView(R.id.card_mPop) TextView mPop;
 
+    //Textview Clicked Status
+    private boolean clicked = false;
+
     private final String LOG_TAG = MusicPreferenceActivity.class.getSimpleName();
+
+    //possible arrays
     private TextView[] musicPreferences = {mGospel, mReggae, mRumba, mRnB, mTechno, mSoul, mCountry, mHipHop, mJazz, mRock, mInstrumental,mPop };
     private int[] ids = {R.id.card_mGospel, R.id.card_mReggae, R.id.card_mRumba, R.id.card_mRnB, R.id.card_mTechno,R.id.card_mSoul,R.id.card_mCountry,R.id.card_mHiphop,R.id.card_mJazz,R.id.card_mRock,R.id.card_mInstrumental,R.id.card_mPop};
 
