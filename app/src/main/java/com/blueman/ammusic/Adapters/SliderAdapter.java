@@ -25,15 +25,15 @@ public class SliderAdapter extends PagerAdapter {
     }
     //Arrays
     private int[] slide_images = {
-            R.drawable.beats_logo,
+            R.drawable.beat,
             R.drawable.voice,
             R.drawable.read_lyrics
 
     };
     private String[] slide_headings = {
             "",
-            "VOICE",
-            "LYRICS"
+            "",
+            ""
 
 
     };
