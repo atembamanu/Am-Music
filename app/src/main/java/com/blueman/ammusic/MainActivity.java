@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.blueman.ammusic.Activities.MusicListActivity;
 import com.blueman.ammusic.Activities.MusicPreferenceActivity;
 import com.blueman.ammusic.Adapters.SliderAdapter;
 
@@ -97,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
                 mNextBtn.setText("Finish");
                 mBackBtn.setText("Back");
                 mNextBtn.setOnClickListener(v -> {
-                    Intent mPreferenceIntent = new Intent(MainActivity.this, MusicPreferenceActivity.class);
+                    Intent mPreferenceIntent = new Intent(MainActivity.this, MusicListActivity.class);
                     startActivity(mPreferenceIntent);
                 });
             }else {

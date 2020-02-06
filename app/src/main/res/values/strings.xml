@@ -16,4 +16,8 @@
     <string name="skip">SKIP</string>
     <string name="continue_to_mList">continue</string>
     <string name="user_mBeater">WHAT SHOULD mBEATERS CALL YOU?</string>
+
+    <string name="title_activity_music_list">AM Beats</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
 </resources>

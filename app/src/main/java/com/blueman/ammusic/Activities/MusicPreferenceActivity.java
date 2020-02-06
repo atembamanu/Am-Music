@@ -21,8 +21,8 @@ import butterknife.ButterKnife;
 public class MusicPreferenceActivity extends AppCompatActivity implements View.OnClickListener {
 
     //buttons
-    @BindView(R.id.mcontinue) Button mContinue;
-    @BindView(R.id.skip) Button mSkip;
+    @BindView(R.id.mcontinue) TextView mContinue;
+    @BindView(R.id.skip) TextView mSkip;
 
     //Textviews in cards
     @BindView(R.id.card_mGospel) TextView mGospel;
