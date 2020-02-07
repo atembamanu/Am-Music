@@ -1,15 +1,206 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/colorWhite"
     tools:context=".Fragments.tab1">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:textColor="@color/colorPrimaryDark"
-        android:text="@string/hello_blank_fragment" />
 
-</FrameLayout>
+           <androidx.cardview.widget.CardView
+               android:id="@+id/card_recentlyAdded"
+               android:layout_width="140dp"
+               android:layout_height="140dp"
+               android:layout_marginStart="8dp"
+               android:layout_marginTop="8dp"
+               app:cardBackgroundColor="#f7f7f7"
+               app:cardCornerRadius="10dp"
+               app:layout_constraintStart_toStartOf="parent"
+               app:layout_constraintTop_toTopOf="parent">
+
+               <ImageView
+                   android:layout_width="wrap_content"
+                   android:layout_gravity="center"
+                   android:src="@drawable/recently_added"
+                   android:layout_height="wrap_content" />
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="@string/_5_tracks"
+                   android:gravity="center"
+                   android:id="@+id/recentlyAdded_count"
+                   android:textStyle="bold"
+                   android:textColor="@color/black_shade"
+                   android:layout_gravity="bottom|center"
+                   android:layout_marginBottom="20dp"/>
+
+
+           </androidx.cardview.widget.CardView>
+
+           <androidx.cardview.widget.CardView
+               android:id="@+id/card_mostPlayed"
+               android:layout_width="140dp"
+               android:layout_height="140dp"
+               android:background="@color/black_shade"
+               app:cardCornerRadius="10dp"
+               app:cardBackgroundColor="#f7f7f7"
+               app:layout_constraintEnd_toEndOf="parent"
+               app:layout_constraintStart_toEndOf="@+id/card_recentlyAdded"
+               app:layout_constraintTop_toTopOf="@+id/card_recentlyAdded">
+               <ImageView
+                   android:layout_width="wrap_content"
+                   android:layout_gravity="center"
+                   android:src="@drawable/imusic_time"
+                   android:layout_height="wrap_content" />
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="@string/_17_tracks"
+                   android:id="@+id/mostPlayed_count"
+                   android:textStyle="bold"
+                   android:textColor="@color/black_shade"
+                   android:layout_gravity="bottom|center"
+                   android:layout_marginBottom="20dp"/>
+
+
+           </androidx.cardview.widget.CardView>
+
+           <androidx.cardview.widget.CardView
+               android:id="@+id/card_recentlyPlayed"
+               android:layout_width="140dp"
+               android:layout_height="140dp"
+               android:layout_marginTop="16dp"
+               app:cardBackgroundColor="#f7f7f7"
+               android:background="@color/black_shade"
+               app:cardCornerRadius="10dp"
+               app:layout_constraintStart_toStartOf="@+id/card_recentlyAdded"
+               app:layout_constraintTop_toBottomOf="@+id/recentlyAdded">
+
+               <ImageView
+                   android:layout_width="wrap_content"
+                   android:layout_gravity="center"
+                   android:src="@drawable/recently_played"
+                   android:layout_height="wrap_content" />
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="@string/_7_tracks"
+                   android:id="@+id/recentlyPlayed_count"
+                   android:textStyle="bold"
+                   android:textColor="@color/black_shade"
+                   android:layout_gravity="bottom|center"
+                   android:layout_marginBottom="20dp"/>
+
+           </androidx.cardview.widget.CardView>
+
+           <androidx.cardview.widget.CardView
+               android:id="@+id/card_favourite"
+               android:layout_width="140dp"
+               android:layout_height="140dp"
+               app:cardBackgroundColor="#f7f7f7"
+               android:layout_marginTop="16dp"
+               android:background="@color/black_shade"
+               app:cardCornerRadius="10dp"
+               app:layout_constraintStart_toStartOf="@+id/card_mostPlayed"
+               app:layout_constraintTop_toBottomOf="@+id/mostPlayed">
+
+               <ImageView
+                   android:layout_width="wrap_content"
+                   android:layout_gravity="center"
+                   android:src="@drawable/favourite"
+                   android:layout_height="wrap_content" />
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="@string/_8_tracks"
+                   android:id="@+id/favourite_count"
+                   android:textStyle="bold"
+                   android:textColor="@color/black_shade"
+                   android:layout_gravity="bottom|center"
+                   android:layout_marginBottom="20dp"/>
+
+           </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/recentlyAdded"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/recently_added"
+        android:textColor="@color/black_shade"
+        app:layout_constraintEnd_toEndOf="@+id/card_recentlyAdded"
+        app:layout_constraintStart_toStartOf="@+id/card_recentlyAdded"
+        app:layout_constraintTop_toBottomOf="@+id/card_recentlyAdded" />
+
+    <TextView
+        android:id="@+id/mostPlayed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/most_played"
+        android:textColor="@color/black_shade"
+        app:layout_constraintEnd_toEndOf="@+id/card_mostPlayed"
+        app:layout_constraintStart_toStartOf="@+id/card_mostPlayed"
+        app:layout_constraintTop_toBottomOf="@+id/card_mostPlayed" />
+
+    <TextView
+        android:id="@+id/recentlyPlayed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/recently_played"
+        android:textColor="@color/black_shade"
+        app:layout_constraintEnd_toEndOf="@+id/card_recentlyPlayed"
+        app:layout_constraintStart_toStartOf="@+id/card_recentlyPlayed"
+        app:layout_constraintTop_toBottomOf="@+id/card_recentlyPlayed" />
+
+    <TextView
+        android:id="@+id/favourite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/my_favorites"
+        android:textColor="@color/black_shade"
+        app:layout_constraintEnd_toEndOf="@+id/card_favourite"
+        app:layout_constraintStart_toStartOf="@+id/card_favourite"
+        app:layout_constraintTop_toBottomOf="@+id/card_favourite" />
+
+    <TextView
+        android:id="@+id/qod"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:maxLines="5"
+        android:textStyle="bold"
+        android:text="@string/qod"
+        android:textColor="@color/black_shade"
+        app:layout_constraintStart_toStartOf="@+id/qod_heading"
+        app:layout_constraintTop_toBottomOf="@+id/qod_heading" />
+
+    <TextView
+        android:id="@+id/qod_heading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/motivation"
+        android:textColor="@color/colorPrimary"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/card_recentlyPlayed"
+        app:layout_constraintTop_toBottomOf="@+id/recentlyPlayed" />
+
+    <TextView
+        android:id="@+id/qod_author"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/heinrich_heine"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/qod" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

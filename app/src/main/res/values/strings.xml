@@ -20,10 +20,19 @@
     <string name="title_activity_music_list">AM Beats</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="app_title">Am Beats</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="discover">Discover</string>
-    <string name="custom">Custom</string>
+    <string name="discover">Overview</string>
+    <string name="custom">Tracks</string>
     <string name="online">Online</string>
+    <string name="music">Music</string>
+    <string name="qod">“Where words leave off, music begins.”</string>
+    <string name="motivation">Daily  motivation</string>
+    <string name="_5_tracks">5 tracks</string>
+    <string name="_17_tracks">17 tracks</string>
+    <string name="_7_tracks">7 tracks</string>
+    <string name="_8_tracks">8 tracks</string>
+    <string name="recently_added">Recently added</string>
+    <string name="most_played">Most played</string>
+    <string name="recently_played">Recently played</string>
+    <string name="my_favorites">My favorites</string>
+    <string name="heinrich_heine">~Heinrich Heine</string>
 </resources>

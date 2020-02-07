@@ -6,10 +6,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#ffffff"
     tools:context=".Activities.MusicListActivity">
-
-    <!-- The primary full-screen view. This can be replaced with whatever view
-         is needed to present your content, e.g. VideoView, SurfaceView,
-         TextureView, etc. -->
     <ImageView
         android:id="@+id/fullscreen_content"
         android:layout_width="wrap_content"
@@ -18,7 +14,8 @@
         android:keepScreenOn="true"
         android:src="@drawable/beat"
         android:layout_marginStart="20dp"
-        android:padding="10dp" />
+        android:padding="10dp"
+        android:contentDescription="@string/music" />
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -35,7 +32,7 @@
         app:tabIndicatorFullWidth="false"
         app:tabMode="fixed"
         app:tabTextAppearance="@style/MineCustomTabText"
-        app:tabTextColor="#800C0C0C">
+        app:tabTextColor="@color/black_shade">
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/tab_item_1"
@@ -83,7 +80,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:src="@drawable/final_search" />
+                android:src="@drawable/final_search"
+                android:contentDescription="@string/music" />
 
         </LinearLayout>
 

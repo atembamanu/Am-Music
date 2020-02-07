@@ -13,8 +13,6 @@ import androidx.viewpager.widget.PagerAdapter;
 
 import com.blueman.ammusic.R;
 
-import butterknife.BindView;
-
 public class SliderAdapter extends PagerAdapter {
     Context context;
     LayoutInflater layoutInflater;
@@ -74,11 +72,11 @@ public class SliderAdapter extends PagerAdapter {
         layoutInflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
         View view = layoutInflater.inflate(R.layout.slide_layout, container, false);
 
-        ImageView slideImageView = (ImageView) view.findViewById(R.id.image_view);
-        TextView slideHeadings = (TextView) view.findViewById(R.id.heading);
-        TextView slideDescription_1 = (TextView) view.findViewById(R.id.text_1);
-        TextView slideDescription_2 = (TextView) view.findViewById(R.id.text_2);
-        TextView slideDescription_3 = (TextView) view.findViewById(R.id.text_3);
+        ImageView slideImageView = view.findViewById(R.id.image_view);
+        TextView slideHeadings = view.findViewById(R.id.heading);
+        TextView slideDescription_1 = view.findViewById(R.id.text_1);
+        TextView slideDescription_2 = view.findViewById(R.id.text_2);
+        TextView slideDescription_3 = view.findViewById(R.id.text_3);
 
 
         slideImageView.setImageResource(slide_images[position]);
