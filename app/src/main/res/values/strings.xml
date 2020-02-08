@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AM Music</string>
+    <string name="app_name">Ngoma</string>
     <string name="select_your_music_preferences">Select your music preferences</string>
     <string name="gospel">Gospel</string>
     <string name="reggae">Reggae</string>
@@ -17,9 +17,9 @@
     <string name="continue_to_mList">continue</string>
     <string name="user_mBeater">WHAT SHOULD mBEATERS CALL YOU?</string>
 
-    <string name="title_activity_music_list">AM Beats</string>
+    <string name="title_activity_music_list">Ngoma</string>
     <string name="dummy_button">Dummy Button</string>
-    <string name="app_title">Am Beats</string>
+    <string name="app_title">Ngoma</string>
     <string name="discover">Overview</string>
     <string name="custom">Tracks</string>
     <string name="online">Online</string>
@@ -35,4 +35,6 @@
     <string name="recently_played">Recently played</string>
     <string name="my_favorites">My favorites</string>
     <string name="heinrich_heine">~Heinrich Heine</string>
+    <string name="back">back</string>
+    <string name="next">next</string>
 </resources>
