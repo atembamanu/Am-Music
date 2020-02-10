@@ -36,8 +36,7 @@ public class TracksCustomAdapter extends RecyclerView.Adapter<TracksCustomAdapte
     public void onBindViewHolder(@NonNull TrackViewHolder holder, int position) {
         holder.songName.setText(trackList.get(position).getTrack().getTrackName());
         holder.songArtist.setText(trackList.get(position).getTrack().getArtistName());
-        holder.releaseDate.setText(String.format("%d users", trackList.get(position).getTrack().getNumFavourite()));
-
+        holder.releaseDate.setText(trackList.get(position).getTrack().getTrackRating());
     }
 
     @Override
@@ -55,6 +54,8 @@ public class TracksCustomAdapter extends RecyclerView.Adapter<TracksCustomAdapte
             releaseDate = itemView.findViewById(R.id.released_date);
         }
 
+
+        //TODO Make sure onclick works for each view
         @Override
         public void onClick(View v) {
             int itemPosition = getLayoutPosition();

@@ -53,13 +53,14 @@
             android:layout_height="wrap_content"
             android:text="@string/custom" />
     </com.google.android.material.tabs.TabLayout>
+
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewPager"
-        android:layout_marginLeft="25dp"
-        android:layout_marginRight="25dp"
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="5dp"
         android:layout_marginTop="10dp"
-        android:layout_height="match_parent">
+        android:layout_marginRight="5dp">
 
     </androidx.viewpager.widget.ViewPager>
 </LinearLayout>

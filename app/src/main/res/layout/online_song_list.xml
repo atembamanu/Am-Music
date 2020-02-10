@@ -58,16 +58,16 @@
         android:id="@+id/released_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:drawableStart="@drawable/star"
         android:drawableLeft="@drawable/star"
-        android:layout_marginLeft="32dp"
-        android:text="23456 users"
         android:drawablePadding="4dp"
-        android:textColor="@color/black_shade"
+        android:text="23456 users"
         android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="@color/black_shade"
         app:layout_constraintBottom_toBottomOf="@+id/song_artist"
         app:layout_constraintStart_toEndOf="@+id/song_artist"
-        app:layout_constraintTop_toBottomOf="@+id/song_name"
-        android:drawableStart="@drawable/star" />
+        app:layout_constraintTop_toBottomOf="@+id/song_name" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
