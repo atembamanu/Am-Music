@@ -6,17 +6,40 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#ffffff"
     tools:context=".Activities.MusicListActivity">
-    <ImageView
-        android:id="@+id/fullscreen_content"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="top"
-        android:keepScreenOn="true"
-        android:src="@mipmap/beat"
-        android:layout_marginStart="20dp"
-        android:padding="10dp"
-        android:contentDescription="@string/music"
-        android:layout_marginLeft="20dp" />
+  <androidx.constraintlayout.widget.ConstraintLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
+
+      <ImageView
+          android:id="@+id/fullscreen_content"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginStart="20dp"
+          android:layout_marginLeft="20dp"
+          android:contentDescription="@string/music"
+          android:gravity="top"
+          android:keepScreenOn="true"
+          android:padding="10dp"
+          android:src="@mipmap/beat"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent" />
+
+
+      <TextView
+          android:id="@+id/share_app"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginEnd="48dp"
+          android:layout_marginRight="48dp"
+          android:clickable="true"
+          android:focusable="true"
+          android:drawableStart="@drawable/share"
+          android:drawableLeft="@drawable/share"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintTop_toTopOf="parent" />
+  </androidx.constraintlayout.widget.ConstraintLayout>
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -86,6 +109,7 @@
                 android:contentDescription="@string/music" />
 
         </LinearLayout>
+
 
     </FrameLayout>
 

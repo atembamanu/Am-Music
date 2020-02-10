@@ -55,7 +55,7 @@
         app:layout_constraintTop_toBottomOf="@id/song_name" />
 
     <TextView
-        android:id="@+id/released_date"
+        android:id="@+id/ratings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -63,7 +63,6 @@
         android:drawableStart="@drawable/star"
         android:drawableLeft="@drawable/star"
         android:drawablePadding="4dp"
-        android:text="23456 users"
         android:textAppearance="@style/TextAppearance.AppCompat.Small"
         android:textColor="@color/black_shade"
         app:layout_constraintBottom_toBottomOf="@+id/song_artist"

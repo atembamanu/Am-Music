@@ -1,17 +1,17 @@
 package com.blueman.ammusic.Activities;
 
 import android.annotation.SuppressLint;
-
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager.widget.PagerAdapter;
-import androidx.viewpager.widget.ViewPager;
-
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.TextView;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
 
 import com.blueman.ammusic.Adapters.MusicTabsAdapter;
 import com.blueman.ammusic.Fragments.tab3;
@@ -19,11 +19,17 @@ import com.blueman.ammusic.R;
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class MusicListActivity extends AppCompatActivity implements tab3.OnFragmentInteractionListener {
+
+    //TODO Bind all views using butterknife
     private TabLayout tabLayout;
     private TabItem tabItem1, tabItem2, tabItem3;
     private MusicTabsAdapter pagerAdapter;
     public ViewPager viewPager;
+    @BindView(R.id.share_app) TextView share;
     private static final boolean AUTO_HIDE = true;
     private static final int AUTO_HIDE_DELAY_MILLIS = 3000;
     private static final int UI_ANIMATION_DELAY = 400;
@@ -75,7 +81,9 @@ public class MusicListActivity extends AppCompatActivity implements tab3.OnFragm
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_music_list);
+        ButterKnife.bind(this);
 
+        shareWithFriends();
         mVisible = true;
         mControlsView = findViewById(R.id.fullscreen_content_controls);
         mContentView = findViewById(R.id.fullscreen_content);
@@ -128,13 +136,21 @@ public class MusicListActivity extends AppCompatActivity implements tab3.OnFragm
 
     }
 
+    private void shareWithFriends() {
+        share.setOnClickListener(v -> {
+            Intent sendIntent = new Intent();
+            sendIntent.setAction(Intent.ACTION_SEND);
+            sendIntent.putExtra(Intent.EXTRA_TEXT, "Still Negotiating, I'll reveal once ready!");
+            sendIntent.setType("text/plain");
+
+            Intent shareIntent = Intent.createChooser(sendIntent, null);
+            startActivity(shareIntent);
+        });
+    }
+
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-
-        // Trigger the initial hide() shortly after the activity has been
-        // created, to briefly hint to the user that UI controls
-        // are available.
         delayedHide(100);
     }
 
@@ -171,11 +187,6 @@ public class MusicListActivity extends AppCompatActivity implements tab3.OnFragm
         mHideHandler.removeCallbacks(mHidePart2Runnable);
         mHideHandler.postDelayed(mShowPart2Runnable, UI_ANIMATION_DELAY);
     }
-
-    /**
-     * Schedules a call to hide() in delay milliseconds, canceling any
-     * previously scheduled calls.
-     */
     private void delayedHide(int delayMillis) {
         mHideHandler.removeCallbacks(mHideRunnable);
         mHideHandler.postDelayed(mHideRunnable, delayMillis);
