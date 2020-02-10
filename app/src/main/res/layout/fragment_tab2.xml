@@ -12,7 +12,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="8dp"
         android:text="@string/top_trending_songs"
         android:textColor="@color/colorPrimary"
         android:textSize="18sp"
@@ -24,11 +23,15 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:paddingLeft="9sp"
+            android:paddingRight="4sp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="70dp"
             tools:listitem="@layout/online_song_list"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textView"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:paddingEnd="0sp"
+            android:paddingStart="15sp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

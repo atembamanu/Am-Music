@@ -36,7 +36,7 @@ public class TracksCustomAdapter extends RecyclerView.Adapter<TracksCustomAdapte
     public void onBindViewHolder(@NonNull TrackViewHolder holder, int position) {
         holder.songName.setText(trackList.get(position).getTrack().getTrackName());
         holder.songArtist.setText(trackList.get(position).getTrack().getArtistName());
-        holder.ratings.setText(trackList.get(position).getTrack().getTrackRating());
+//        holder.ratings.setText(trackList.get(position).getTrack().getTrackRating());
     }
 
     @Override
@@ -51,7 +51,7 @@ public class TracksCustomAdapter extends RecyclerView.Adapter<TracksCustomAdapte
 
             songName =  itemView.findViewById(R.id.song_name);
             songArtist = itemView.findViewById(R.id.song_artist);
-            ratings = itemView.findViewById(R.id.ratings);
+//            ratings = itemView.findViewById(R.id.ratings);
         }
 
 

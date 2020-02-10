@@ -77,5 +77,6 @@ public class tab2 extends Fragment {
                 Log.d("Error", Objects.requireNonNull(t.getMessage()));
             }
         });
+
     }
 }
