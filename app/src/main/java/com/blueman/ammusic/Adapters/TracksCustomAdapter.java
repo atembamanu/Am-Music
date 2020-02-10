@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -44,7 +45,7 @@ public class TracksCustomAdapter extends RecyclerView.Adapter<TracksCustomAdapte
         return trackList.size();
     }
 
-    public class TrackViewHolder extends RecyclerView.ViewHolder{
+    public class TrackViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView songName, songArtist, releaseDate;
         public TrackViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -52,6 +53,12 @@ public class TracksCustomAdapter extends RecyclerView.Adapter<TracksCustomAdapte
             songName =  itemView.findViewById(R.id.song_name);
             songArtist = itemView.findViewById(R.id.song_artist);
             releaseDate = itemView.findViewById(R.id.released_date);
+        }
+
+        @Override
+        public void onClick(View v) {
+            int itemPosition = getLayoutPosition();
+            Toast.makeText(v.getContext(), "Clicked at position "+itemPosition, Toast.LENGTH_SHORT).show();
         }
     }
 }

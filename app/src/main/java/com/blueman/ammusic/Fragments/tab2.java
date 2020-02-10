@@ -6,7 +6,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -15,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.blueman.ammusic.Adapters.TracksCustomAdapter;
 import com.blueman.ammusic.HttpRequest.MusixmatchApi;
 import com.blueman.ammusic.HttpRequest.MusixmatchClient;
-import com.blueman.ammusic.Models.Track;
 import com.blueman.ammusic.Models.TrackList;
 import com.blueman.ammusic.Models.TrackModel;
 import com.blueman.ammusic.R;
@@ -60,13 +58,11 @@ public class tab2 extends Fragment {
 
                 if(response.isSuccessful()){
                     if (response.body() != null) {
-                        //TODO : Try to get the data from the Url
                         List<TrackList> tracks = response.body().getMessage().getBody().getTrackList();
                         tracksCustomAdapter = new TracksCustomAdapter(getContext(),tracks);
                         recyclerView.setAdapter(tracksCustomAdapter);
                     } else {
                         Log.i("onEmptyResponse", "Returned empty response");
-                        Toast.makeText(getContext(),"Nothing returned",Toast.LENGTH_LONG).show();
                     }
 
                 }else{

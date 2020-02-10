@@ -37,6 +37,6 @@
     <string name="heinrich_heine">~Heinrich Heine</string>
     <string name="back">back</string>
     <string name="next">next</string>
-    <string name="top_trending_songs">Trending songs today</string>
+    <string name="top_trending_songs">All time trending songs</string>
     <string name="attention">Attention</string>
 </resources>
