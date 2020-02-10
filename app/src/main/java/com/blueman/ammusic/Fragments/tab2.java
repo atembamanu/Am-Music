@@ -15,12 +15,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.blueman.ammusic.Adapters.TracksCustomAdapter;
 import com.blueman.ammusic.HttpRequest.MusixmatchApi;
 import com.blueman.ammusic.HttpRequest.MusixmatchClient;
-import com.blueman.ammusic.HttpResponse.TrackListResponse;
+import com.blueman.ammusic.Models.Track;
 import com.blueman.ammusic.Models.TrackList;
+import com.blueman.ammusic.Models.TrackModel;
 import com.blueman.ammusic.R;
 import com.blueman.ammusic.Utils.Constants;
-import java.util.ArrayList;
-import java.util.Arrays;
+
+import java.util.List;
 import java.util.Objects;
 
 import retrofit2.Call;
@@ -32,7 +33,6 @@ import retrofit2.Response;
  */
 public class tab2 extends Fragment {
         private TracksCustomAdapter tracksCustomAdapter;
-        private ArrayList<TrackList> data;
         private RecyclerView recyclerView;
 
     public tab2() { }
@@ -51,18 +51,18 @@ public class tab2 extends Fragment {
 
     private void loadJSON() {
         MusixmatchApi client = MusixmatchClient.getClient();
-        Call<TrackListResponse> call = client.getTracks(Constants.API_KEY, 1);
-        call.enqueue(new Callback<TrackListResponse>() {
+        Call<TrackModel> call = client.getTracks(Constants.API_KEY, 1);
+
+
+        call.enqueue(new Callback<TrackModel>() {
             @Override
-            public void onResponse(Call<TrackListResponse> call, Response<TrackListResponse> response) {
+            public void onResponse(Call<TrackModel> call, Response<TrackModel> response) {
 
                 if(response.isSuccessful()){
                     if (response.body() != null) {
-                        TrackListResponse trackListResponse = response.body();
-                        Log.i("ResponseString", trackListResponse.toString());
-                        data = new ArrayList<>(Arrays.asList(trackListResponse.getTracks()));
-                        Log.d("MData", data.toString());
-                        tracksCustomAdapter = new TracksCustomAdapter(getContext(),data);
+                        //TODO : Try to get the data from the Url
+                        List<TrackList> tracks = response.body().getMessage().getBody().getTrackList();
+                        tracksCustomAdapter = new TracksCustomAdapter(getContext(),tracks);
                         recyclerView.setAdapter(tracksCustomAdapter);
                     } else {
                         Log.i("onEmptyResponse", "Returned empty response");
@@ -75,7 +75,7 @@ public class tab2 extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<TrackListResponse> call, Throwable t) {
+            public void onFailure(Call<TrackModel> call, Throwable t) {
                 Log.d("Error", Objects.requireNonNull(t.getMessage()));
             }
         });

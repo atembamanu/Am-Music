@@ -1,11 +1,13 @@
 
 package com.blueman.ammusic.Models;
 
+import java.io.Serializable;
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Track {
+public class Track implements Serializable
+{
 
     @SerializedName("track_id")
     @Expose
@@ -67,6 +69,61 @@ public class Track {
     @SerializedName("primary_genres")
     @Expose
     private PrimaryGenres primaryGenres;
+    private final static long serialVersionUID = 8278805739561678498L;
+
+    /**
+     * No args constructor for use in serialization
+     * 
+     */
+    public Track() {
+    }
+
+    /**
+     * 
+     * @param primaryGenres
+     * @param albumName
+     * @param updatedTime
+     * @param trackRating
+     * @param trackId
+     * @param albumId
+     * @param artistId
+     * @param trackName
+     * @param explicit
+     * @param trackNameTranslationList
+     * @param trackShareUrl
+     * @param hasLyrics
+     * @param numFavourite
+     * @param trackEditUrl
+     * @param instrumental
+     * @param restricted
+     * @param hasRichsync
+     * @param artistName
+     * @param hasSubtitles
+     * @param commontrackId
+     */
+    public Track(Integer trackId, String trackName, List<Object> trackNameTranslationList, Integer trackRating, Integer commontrackId, Integer instrumental, Integer explicit, Integer hasLyrics, Integer hasSubtitles, Integer hasRichsync, Integer numFavourite, Integer albumId, String albumName, Integer artistId, String artistName, String trackShareUrl, String trackEditUrl, Integer restricted, String updatedTime, PrimaryGenres primaryGenres) {
+        super();
+        this.trackId = trackId;
+        this.trackName = trackName;
+        this.trackNameTranslationList = trackNameTranslationList;
+        this.trackRating = trackRating;
+        this.commontrackId = commontrackId;
+        this.instrumental = instrumental;
+        this.explicit = explicit;
+        this.hasLyrics = hasLyrics;
+        this.hasSubtitles = hasSubtitles;
+        this.hasRichsync = hasRichsync;
+        this.numFavourite = numFavourite;
+        this.albumId = albumId;
+        this.albumName = albumName;
+        this.artistId = artistId;
+        this.artistName = artistName;
+        this.trackShareUrl = trackShareUrl;
+        this.trackEditUrl = trackEditUrl;
+        this.restricted = restricted;
+        this.updatedTime = updatedTime;
+        this.primaryGenres = primaryGenres;
+    }
 
     public Integer getTrackId() {
         return trackId;

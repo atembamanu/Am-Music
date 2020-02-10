@@ -12,14 +12,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.blueman.ammusic.Models.TrackList;
 import com.blueman.ammusic.R;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class TracksCustomAdapter extends RecyclerView.Adapter<TracksCustomAdapter.TrackViewHolder> {
 
     private LayoutInflater inflater;
-    private ArrayList<TrackList> trackList;
+    private List<TrackList> trackList;
 
-    public TracksCustomAdapter(Context context, ArrayList<TrackList> trackList) {
+    public TracksCustomAdapter(Context context, List<TrackList> trackList) {
         inflater = LayoutInflater.from(context);
         this.trackList = trackList;
     }
@@ -33,10 +33,9 @@ public class TracksCustomAdapter extends RecyclerView.Adapter<TracksCustomAdapte
 
     @Override
     public void onBindViewHolder(@NonNull TrackViewHolder holder, int position) {
-
-        holder.songName.setText(trackList.get(position).getTrack().getArtistName());
+        holder.songName.setText(trackList.get(position).getTrack().getTrackName());
         holder.songArtist.setText(trackList.get(position).getTrack().getArtistName());
-        holder.releaseDate.setText(trackList.get(position).getTrack().getUpdatedTime());
+        holder.releaseDate.setText(String.format("%d users", trackList.get(position).getTrack().getNumFavourite()));
 
     }
 
