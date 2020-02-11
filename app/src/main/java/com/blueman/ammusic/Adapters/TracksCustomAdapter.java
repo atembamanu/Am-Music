@@ -28,7 +28,7 @@ public class TracksCustomAdapter extends RecyclerView.Adapter<TracksCustomAdapte
     @NonNull
     @Override
     public TrackViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = inflater.inflate(R.layout.online_song_list, parent, false);
+        View view = inflater.inflate(R.layout.song_list, parent, false);
         return new TrackViewHolder(view);
     }
 
