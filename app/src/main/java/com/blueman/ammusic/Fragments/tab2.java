@@ -6,7 +6,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -15,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.blueman.ammusic.Adapters.TracksCustomAdapter;
 import com.blueman.ammusic.HttpRequest.MusixmatchApi;
 import com.blueman.ammusic.HttpRequest.MusixmatchClient;
-import com.blueman.ammusic.Models.Track;
 import com.blueman.ammusic.Models.TrackList;
 import com.blueman.ammusic.Models.TrackModel;
 import com.blueman.ammusic.R;
