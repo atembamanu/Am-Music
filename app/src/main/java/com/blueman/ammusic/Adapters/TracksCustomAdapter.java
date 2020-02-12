@@ -1,6 +1,7 @@
 package com.blueman.ammusic.Adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,10 +20,12 @@ public class TracksCustomAdapter extends RecyclerView.Adapter<TracksCustomAdapte
 
     private LayoutInflater inflater;
     private List<TrackList> trackList;
+    private  Context mContext;
 
-    public TracksCustomAdapter(Context context, List<TrackList> trackList) {
-        inflater = LayoutInflater.from(context);
+    public TracksCustomAdapter(Context mContext, List<TrackList> trackList) {
+        inflater = LayoutInflater.from(mContext);
         this.trackList = trackList;
+        this.mContext = mContext;
     }
 
     @NonNull
@@ -47,10 +50,13 @@ public class TracksCustomAdapter extends RecyclerView.Adapter<TracksCustomAdapte
     public class TrackViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView songName, songArtist, ratings;
         public TrackViewHolder(@NonNull View itemView) {
+
             super(itemView);
 
             songName =  itemView.findViewById(R.id.song_name);
             songArtist = itemView.findViewById(R.id.song_artist);
+
+            itemView.setOnClickListener(this);
 //            ratings = itemView.findViewById(R.id.ratings);
         }
 
@@ -59,7 +65,7 @@ public class TracksCustomAdapter extends RecyclerView.Adapter<TracksCustomAdapte
         @Override
         public void onClick(View v) {
             int itemPosition = getLayoutPosition();
-            Toast.makeText(v.getContext(), "Clicked at position "+itemPosition, Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, "Clicked: "+itemPosition, Toast.LENGTH_SHORT).show();
         }
     }
 }
