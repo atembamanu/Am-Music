@@ -57,8 +57,6 @@ public class TracksCustomAdapter extends RecyclerView.Adapter<TracksCustomAdapte
 
             itemView.setOnClickListener(this);
         }
-
-
         //TODO Make sure onclick works for each view
         @Override
         public void onClick(View v) {
