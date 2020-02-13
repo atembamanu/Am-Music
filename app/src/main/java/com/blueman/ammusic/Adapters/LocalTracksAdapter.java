@@ -2,6 +2,7 @@ package com.blueman.ammusic.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,8 +12,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.blueman.ammusic.Activities.MusicListActivity;
 import com.blueman.ammusic.Models.LocalAudioTracks;
 import com.blueman.ammusic.R;
+
+import org.parceler.Parcels;
 
 import java.util.List;
 
@@ -22,6 +26,10 @@ public class LocalTracksAdapter extends RecyclerView.Adapter<LocalTracksAdapter.
     private Context mContext;
     private LayoutInflater inflater;
 
+    private static SharedPreferences sharedPreferences;
+    private static SharedPreferences.Editor editor;
+    private static final String PREFS_TAG = "SharedPrefs";
+    private static final String PRODUCT_TAG = "localSongs";
 
     public LocalTracksAdapter(Context mContext, List<LocalAudioTracks> localAudioTracks) {
         this.localAudioTracks = localAudioTracks;
@@ -64,6 +72,9 @@ public class LocalTracksAdapter extends RecyclerView.Adapter<LocalTracksAdapter.
         public void onClick(View v) {
 
             int itemPosition = getLayoutPosition();
+            sharedPreferences = mContext.getSharedPreferences(PREFS_TAG, Context.MODE_PRIVATE);
+            editor = sharedPreferences.edit();
+
 
         }
     }

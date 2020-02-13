@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageButton;
@@ -19,6 +20,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.blueman.ammusic.Adapters.MusicTabsAdapter;
 import com.blueman.ammusic.Fragments.tab3;
+import com.blueman.ammusic.Models.LocalAudioTracks;
 import com.blueman.ammusic.R;
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
@@ -29,6 +31,10 @@ import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.single.PermissionListener;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
+
+import org.parceler.Parcels;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -59,6 +65,9 @@ public class MusicListActivity extends AppCompatActivity implements tab3.OnFragm
     private static final int UI_ANIMATION_DELAY = 400;
     private final Handler mHideHandler = new Handler();
     private View mContentView;
+    private static final String TAG = "MusicListActivity";
+    List<LocalAudioTracks> tracks;
+    private int selectedSong;
     private final Runnable mHidePart2Runnable = new Runnable() {
         @SuppressLint("InlinedApi")
         @Override
@@ -111,16 +120,25 @@ public class MusicListActivity extends AppCompatActivity implements tab3.OnFragm
         mVisible = true;
         mControlsView = findViewById(R.id.fullscreen_content_controls);
         mContentView = findViewById(R.id.fullscreen_content);
-
-//        mContentView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                toggle();
-//            }
-//
-//
-//        });
         findViewById(R.id.dummy_button).setOnTouchListener(mDelayHideTouchListener);
+
+        //Check if getIntent has Extras
+        if(getIntent().hasExtra("position")){
+            selectedSong = getIntent().getIntExtra("position", 0);
+            Log.d(TAG, ">>>>>>>>>>"+selectedSong);
+            
+        }
+        if(getIntent().hasExtra("onlineSongs")){
+            tracks = Parcels.unwrap(getIntent().getParcelableExtra("onlineSongs"));
+            Log.d(TAG, ">>>>>>>>>>>"+tracks);
+        }
+
+
+
+
+
+
+
 
         tabLayout = findViewById(R.id.tabLayout);
         tabItem1 = findViewById(R.id.tab_item_1);

@@ -1,8 +1,11 @@
 package com.blueman.ammusic.Models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.io.Serializable;
 
-public class LocalAudioTracks{
+public class LocalAudioTracks implements Parcelable {
 
    private String aPath;
     private String aName;
@@ -19,6 +22,25 @@ public class LocalAudioTracks{
     public LocalAudioTracks() {
 
     }
+
+    protected LocalAudioTracks(Parcel in) {
+        aPath = in.readString();
+        aName = in.readString();
+        aAlbum = in.readString();
+        aArtist = in.readString();
+    }
+
+    public static final Creator<LocalAudioTracks> CREATOR = new Creator<LocalAudioTracks>() {
+        @Override
+        public LocalAudioTracks createFromParcel(Parcel in) {
+            return new LocalAudioTracks(in);
+        }
+
+        @Override
+        public LocalAudioTracks[] newArray(int size) {
+            return new LocalAudioTracks[size];
+        }
+    };
 
     public String getPath() {
         return aPath;
@@ -50,5 +72,18 @@ public class LocalAudioTracks{
 
     public void setArtist(String aArtist) {
         this.aArtist = aArtist;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(aPath);
+        dest.writeString(aName);
+        dest.writeString(aAlbum);
+        dest.writeString(aArtist);
     }
 }
