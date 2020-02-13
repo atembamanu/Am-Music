@@ -7,7 +7,7 @@
     >
 
     <ImageView
-        android:src="@drawable/songs_cover"
+        android:src="@drawable/back"
         android:layout_centerInParent="true"
         android:layout_width="match_parent"
         android:scaleType="centerCrop"
@@ -398,6 +398,8 @@
             app:layout_constraintBottom_toTopOf="@+id/relativeLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
+            android:outlineSpotShadowColor="@color/colorPrimary"
+            android:outlineAmbientShadowColor="@color/colorPrimary"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/relativeLayout"
             app:layout_constraintVertical_bias="0.75" />

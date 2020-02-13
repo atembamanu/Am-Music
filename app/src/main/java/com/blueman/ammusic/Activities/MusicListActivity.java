@@ -112,14 +112,14 @@ public class MusicListActivity extends AppCompatActivity implements tab3.OnFragm
         mControlsView = findViewById(R.id.fullscreen_content_controls);
         mContentView = findViewById(R.id.fullscreen_content);
 
-        mContentView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                toggle();
-            }
-
-
-        });
+//        mContentView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                toggle();
+//            }
+//
+//
+//        });
         findViewById(R.id.dummy_button).setOnTouchListener(mDelayHideTouchListener);
 
         tabLayout = findViewById(R.id.tabLayout);
@@ -281,15 +281,6 @@ public class MusicListActivity extends AppCompatActivity implements tab3.OnFragm
         super.onPostCreate(savedInstanceState);
         delayedHide(100);
     }
-
-    private void toggle() {
-        if (mVisible) {
-            hide();
-        } else {
-            show();
-        }
-    }
-
     private void hide() {
         // Hide UI first
         ActionBar actionBar = getSupportActionBar();
@@ -302,6 +293,12 @@ public class MusicListActivity extends AppCompatActivity implements tab3.OnFragm
         // Schedule a runnable to remove the status and navigation bar after a delay
         mHideHandler.removeCallbacks(mShowPart2Runnable);
         mHideHandler.postDelayed(mHidePart2Runnable, UI_ANIMATION_DELAY);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        hide();
     }
 
     @SuppressLint("InlinedApi")
@@ -324,7 +321,6 @@ public class MusicListActivity extends AppCompatActivity implements tab3.OnFragm
     public void onFragmentInteraction(Uri uri) {
 
     }
-
 
     @Override
     public void onBackPressed() {
