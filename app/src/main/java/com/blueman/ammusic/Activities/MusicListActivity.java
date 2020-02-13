@@ -2,26 +2,23 @@ package com.blueman.ammusic.Activities;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.provider.MediaStore;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
-import com.blueman.ammusic.Adapters.LocalTracksAdapter;
 import com.blueman.ammusic.Adapters.MusicTabsAdapter;
 import com.blueman.ammusic.Fragments.tab3;
-import com.blueman.ammusic.Models.LocalAudioTracks;
 import com.blueman.ammusic.R;
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
@@ -31,10 +28,7 @@ import com.karumi.dexter.listener.PermissionDeniedResponse;
 import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.single.PermissionListener;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -46,6 +40,18 @@ public class MusicListActivity extends AppCompatActivity implements tab3.OnFragm
     private TabItem tabItem1, tabItem2, tabItem3;
     private MusicTabsAdapter pagerAdapter;
     public ViewPager viewPager;
+
+    @BindView(R.id.imageButton2) ImageButton like;
+    @BindView(R.id.imageButton2new) ImageButton notlike;
+    @BindView(R.id.button) ImageButton dislike;
+    @BindView(R.id.buttontwo) ImageButton notdislike;
+
+    @BindView(R.id.play_button) ImageButton play;
+    @BindView(R.id.pause_button) ImageButton pause;
+    @BindView(R.id.play_button_main) ImageButton play_main;
+    @BindView(R.id.pause_button_main) ImageButton pause_main;
+
+    @BindView(R.id.activity_main) SlidingUpPanelLayout mLayout;
     private Context mContext;
     @BindView(R.id.share_app) TextView share;
     private static final boolean AUTO_HIDE = true;
@@ -106,8 +112,6 @@ public class MusicListActivity extends AppCompatActivity implements tab3.OnFragm
         mControlsView = findViewById(R.id.fullscreen_content_controls);
         mContentView = findViewById(R.id.fullscreen_content);
 
-
-        // Set up the user interaction to manually show or hide the system UI.
         mContentView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -152,6 +156,94 @@ public class MusicListActivity extends AppCompatActivity implements tab3.OnFragm
         });
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
+        like.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                notlike.setVisibility(View.VISIBLE);
+                Toast.makeText(MusicListActivity.this,"You Like the Song",Toast.LENGTH_SHORT).show();
+                if (notdislike.getVisibility() == View.VISIBLE){
+                    notdislike.setVisibility(View.GONE);
+                }
+            }
+        });
+
+        notlike.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                notlike.setVisibility(View.GONE);
+            }
+        });
+
+        dislike.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                notdislike.setVisibility(View.VISIBLE);
+                Toast.makeText(MusicListActivity.this,"You DisLike the Song",Toast.LENGTH_SHORT).show();
+                if (notlike.getVisibility() == View.VISIBLE){
+                    notlike.setVisibility(View.GONE);
+                }
+            }
+        });
+
+        notdislike.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                notdislike.setVisibility(View.GONE);
+            }
+        });
+
+        play.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                play.setVisibility(View.GONE);
+                pause.setVisibility(View.VISIBLE);
+                Toast.makeText(MusicListActivity.this,"Song Is now Playing",Toast.LENGTH_SHORT).show();
+                if (play_main.getVisibility() == View.VISIBLE){
+                    play_main.setVisibility(View.GONE);
+                    pause_main.setVisibility(View.VISIBLE);
+                }
+
+            }
+        });
+
+        pause.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                pause.setVisibility(View.GONE);
+                play.setVisibility(View.VISIBLE);
+                Toast.makeText(MusicListActivity.this,"Song is Pause",Toast.LENGTH_SHORT).show();
+                if (pause_main.getVisibility() == View.VISIBLE){
+                    pause_main.setVisibility(View.GONE);
+                    play_main.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
+        play_main.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                play_main.setVisibility(View.GONE);
+                pause_main.setVisibility(View.VISIBLE);
+                Toast.makeText(MusicListActivity.this,"Song Is now Playing",Toast.LENGTH_SHORT).show();
+                if (play.getVisibility() == View.VISIBLE){
+                    play.setVisibility(View.GONE);
+                    pause.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
+        pause_main.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                pause_main.setVisibility(View.GONE);
+                play_main.setVisibility(View.VISIBLE);
+                Toast.makeText(MusicListActivity.this,"Song is Pause",Toast.LENGTH_SHORT).show();
+                if (pause.getVisibility() == View.VISIBLE){
+                    pause.setVisibility(View.GONE);
+                    play.setVisibility(View.VISIBLE);
+                }
+            }
+        });
     }
     public void externalStoragePermission(){
         Dexter.withActivity(this)
@@ -231,5 +323,16 @@ public class MusicListActivity extends AppCompatActivity implements tab3.OnFragm
     @Override
     public void onFragmentInteraction(Uri uri) {
 
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        if (mLayout != null &&
+                (mLayout.getPanelState() == SlidingUpPanelLayout.PanelState.EXPANDED || mLayout.getPanelState() == SlidingUpPanelLayout.PanelState.ANCHORED)) {
+            mLayout.setPanelState(SlidingUpPanelLayout.PanelState.COLLAPSED);
+        } else {
+            super.onBackPressed();
+        }
     }
 }

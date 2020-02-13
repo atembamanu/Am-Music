@@ -1,114 +1,144 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.sothree.slidinguppanel.SlidingUpPanelLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#ffffff"
-    tools:context=".Activities.MusicListActivity">
-  <androidx.constraintlayout.widget.ConstraintLayout
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content">
+    android:gravity="bottom"
+    android:background="@color/colorWhite"
+    tools:context=".MainActivity"
+    app:umanoPanelHeight="70dp"
+    app:umanoShadowHeight="5dp">
 
-      <ImageView
-          android:id="@+id/fullscreen_content"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_marginStart="20dp"
-          android:layout_marginLeft="20dp"
-          android:contentDescription="@string/music"
-          android:gravity="top"
-          android:keepScreenOn="true"
-          android:padding="10dp"
-          android:src="@mipmap/beat"
-          app:layout_constraintBottom_toBottomOf="parent"
-          app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toTopOf="parent" />
-
-
-      <TextView
-          android:id="@+id/share_app"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_marginEnd="48dp"
-          android:layout_marginRight="48dp"
-          android:clickable="true"
-          android:focusable="true"
-          android:drawableStart="@drawable/share"
-          android:drawableLeft="@drawable/share"
-          app:layout_constraintBottom_toBottomOf="parent"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintTop_toTopOf="parent" />
-  </androidx.constraintlayout.widget.ConstraintLayout>
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="0dp"
-    android:layout_marginTop="80dp"
-    android:orientation="vertical">
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabLayout"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#ffffff"
-        app:tabGravity="fill"
-        app:tabIndicatorColor="#FF9800"
-        app:tabIndicatorFullWidth="false"
-        app:tabMode="fixed"
-        app:tabTextAppearance="@style/MineCustomTabText"
-        app:tabTextColor="@color/black_shade">
+        android:layout_height="match_parent">
 
-        <com.google.android.material.tabs.TabItem
-            android:id="@+id/tab_item_1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/discover" />
+        <!--        <TextView-->
+        <!--            android:layout_centerInParent="true"-->
+        <!--            android:textSize="26sp"-->
+        <!--            android:text="Main Content"-->
+        <!--            android:textColor="@color/colorPrimary"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content" />-->
 
-        <com.google.android.material.tabs.TabItem
-            android:id="@+id/tab_item_2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/online" />
-
-        <com.google.android.material.tabs.TabItem
-            android:id="@+id/tab_item_3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/custom" />
-    </com.google.android.material.tabs.TabLayout>
-
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/viewPager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="10dp">
-
-    </androidx.viewpager.widget.ViewPager>
-</LinearLayout>
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fitsSystemWindows="true">
-        <LinearLayout
-            android:id="@+id/fullscreen_content_controls"
-            style="?metaButtonBarStyle"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:layout_gravity="bottom|center_horizontal"
-            android:orientation="horizontal"
-            tools:ignore="UselessParent">
+            android:layout_height="match_parent"
+            android:background="#ffffff"
+            tools:context=".Activities.MusicListActivity">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-            <ImageView
-                android:id="@+id/dummy_button"
-                android:layout_width="0dp"
+                <ImageView
+                    android:id="@+id/fullscreen_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:contentDescription="@string/music"
+                    android:gravity="top"
+                    android:keepScreenOn="true"
+                    android:padding="10dp"
+                    android:src="@mipmap/beat"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <TextView
+                    android:id="@+id/share_app"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="48dp"
+                    android:layout_marginRight="48dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:drawableStart="@drawable/share"
+                    android:drawableLeft="@drawable/share"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:src="@mipmap/final_search"
-                android:contentDescription="@string/music" />
+                android:layout_marginBottom="0dp"
+                android:layout_marginTop="80dp"
+                android:orientation="vertical">
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/tabLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#ffffff"
+                    app:tabGravity="fill"
+                    app:tabIndicatorColor="#FF9800"
+                    app:tabIndicatorFullWidth="false"
+                    app:tabMode="fixed"
+                    app:tabTextAppearance="@style/MineCustomTabText"
+                    app:tabTextColor="@color/black_shade">
 
-        </LinearLayout>
+                    <com.google.android.material.tabs.TabItem
+                        android:id="@+id/tab_item_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/discover" />
 
+                    <com.google.android.material.tabs.TabItem
+                        android:id="@+id/tab_item_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/online" />
 
-    </FrameLayout>
+                    <com.google.android.material.tabs.TabItem
+                        android:id="@+id/tab_item_3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/custom" />
+                </com.google.android.material.tabs.TabLayout>
 
-</FrameLayout>
+                <androidx.viewpager.widget.ViewPager
+                    android:id="@+id/viewPager"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp">
+
+                </androidx.viewpager.widget.ViewPager>
+            </LinearLayout>
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fitsSystemWindows="true">
+                <LinearLayout
+                    android:id="@+id/fullscreen_content_controls"
+                    style="?metaButtonBarStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_gravity="bottom|center_horizontal"
+                    android:orientation="horizontal"
+                    tools:ignore="UselessParent">
+
+                <ImageView
+                    android:id="@+id/dummy_button"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@mipmap/final_search"
+                    android:visibility="gone"
+                    android:contentDescription="@string/music" />
+
+                </LinearLayout>
+            </FrameLayout>
+
+        </FrameLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <include layout="@layout/playmusic" />
+    </RelativeLayout>
+
+</com.sothree.slidinguppanel.SlidingUpPanelLayout>

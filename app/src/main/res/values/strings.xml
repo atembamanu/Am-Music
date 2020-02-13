@@ -39,4 +39,7 @@
     <string name="next">next</string>
     <string name="top_trending_songs">All time trending songs</string>
     <string name="attention">Attention</string>
+    <string name="album_art">Album Art</string>
+    <string name="camila">Havana</string>
+    <string name="camila_cabello">Camila Cabello</string>
 </resources>
