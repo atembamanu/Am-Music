@@ -1,7 +1,6 @@
 package com.blueman.ammusic.Adapters;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,7 +56,6 @@ public class TracksCustomAdapter extends RecyclerView.Adapter<TracksCustomAdapte
             songArtist = itemView.findViewById(R.id.song_artist);
 
             itemView.setOnClickListener(this);
-//            ratings = itemView.findViewById(R.id.ratings);
         }
 
 

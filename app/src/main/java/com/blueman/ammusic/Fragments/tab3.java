@@ -1,16 +1,31 @@
 package com.blueman.ammusic.Fragments;
 
+import android.content.ContentResolver;
 import android.content.Context;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.blueman.ammusic.Activities.MusicListActivity;
+import com.blueman.ammusic.Adapters.LocalTracksAdapter;
+import com.blueman.ammusic.Models.LocalAudioTracks;
 import com.blueman.ammusic.R;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -21,29 +36,20 @@ import com.blueman.ammusic.R;
  * create an instance of this fragment.
  */
 public class tab3 extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+
+    private RecyclerView recyclerView;
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private Context mContext;
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
 
     public tab3() {
-        // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment tab3.
-     */
     // TODO: Rename and change types and number of parameters
     public static tab3 newInstance(String param1, String param2) {
         tab3 fragment = new tab3();
@@ -57,18 +63,67 @@ public class tab3 extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_tab3, container, false);
+        View view = inflater.inflate(R.layout.fragment_tab3, container, false);
+        recyclerView = view.findViewById(R.id.localRecyclerView);
+
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(layoutManager);
+
+        List<LocalAudioTracks> musicFound= getLocalMusic();
+        LocalTracksAdapter localTracksAdapter = new LocalTracksAdapter(getContext(), musicFound);
+        recyclerView.setAdapter(localTracksAdapter);
+
+        if (getArguments() != null) {
+            mParam1 = getArguments().getString(ARG_PARAM1);
+            mParam2 = getArguments().getString(ARG_PARAM2);
+
+        }
+
+        return view;
     }
+
+    private List<LocalAudioTracks> getLocalMusic() {
+        List<LocalAudioTracks> tempAudioList = new ArrayList<>();
+        ContentResolver contentResolver = Objects.requireNonNull(getActivity()).getContentResolver();
+        String selection = MediaStore.Audio.Media.IS_MUSIC + " != 0";
+        Uri uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
+        Cursor c = contentResolver.query(uri, null, null, null, null);
+
+        if(c!=null && c.moveToFirst()){
+            //get columns
+            int titleColumn = c.getColumnIndex
+                    (android.provider.MediaStore.Audio.Media.TITLE);
+            int idColumn = c.getColumnIndex
+                    (android.provider.MediaStore.Audio.Media._ID);
+            int artistColumn = c.getColumnIndex
+                    (android.provider.MediaStore.Audio.Media.ARTIST);
+            int albumColumn = c.getColumnIndex
+                    (MediaStore.Audio.Media.ALBUM);
+            //add songs to list
+            do {
+
+                LocalAudioTracks audioModel = new LocalAudioTracks();
+                long thisId = c.getLong(idColumn);
+                String thisTitle = c.getString(titleColumn);
+                String thisArtist = c.getString(artistColumn);
+                String thisAlbum = c.getString(albumColumn);
+
+                audioModel.setName(thisTitle);
+                audioModel.setAlbum(thisAlbum);
+                audioModel.setArtist(thisArtist);
+
+                tempAudioList.add(audioModel);
+            }
+            while (c.moveToNext());
+        }
+        return  tempAudioList;
+    }
+
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
@@ -93,7 +148,7 @@ public class tab3 extends Fragment {
         super.onDetach();
         mListener = null;
     }
-        //TODO check out this link http://developer.android.com/training/basics/fragments/communicating.html
+    //TODO check out this link http://developer.android.com/training/basics/fragments/communicating.html
 
 
     public interface OnFragmentInteractionListener {

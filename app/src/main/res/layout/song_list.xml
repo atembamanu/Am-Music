@@ -35,6 +35,8 @@
         android:layout_toEndOf="@id/play_button"
         android:layout_toRightOf="@id/play_button"
         android:text="@string/attention"
+        android:ellipsize="end"
+        android:maxLines="1"
         android:marqueeRepeatLimit="marquee_forever"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="@color/black_shade"

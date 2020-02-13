@@ -20,18 +20,24 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="35dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:paddingStart="15sp"
+        android:paddingLeft="15sp"
+        android:paddingRight="6sp"
+        android:paddingEnd="6sp"
+        app:layout_constraintTop_toBottomOf="@id/textView"
+        >
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:paddingLeft="9sp"
-            android:paddingRight="4sp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="70dp"
-            tools:listitem="@layout/song_list"
-            app:layout_constraintTop_toBottomOf="@id/textView"
-            app:layout_constraintStart_toStartOf="parent"
-            android:paddingEnd="0sp"
-            android:paddingStart="15sp" />
+            android:layout_height="wrap_content"
+            tools:listitem="@layout/song_list" />
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

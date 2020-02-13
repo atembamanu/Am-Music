@@ -1,10 +1,15 @@
 package com.blueman.ammusic.Activities;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.MediaStore;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
@@ -13,11 +18,23 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import com.blueman.ammusic.Adapters.LocalTracksAdapter;
 import com.blueman.ammusic.Adapters.MusicTabsAdapter;
 import com.blueman.ammusic.Fragments.tab3;
+import com.blueman.ammusic.Models.LocalAudioTracks;
 import com.blueman.ammusic.R;
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionDeniedResponse;
+import com.karumi.dexter.listener.PermissionGrantedResponse;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.single.PermissionListener;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -29,6 +46,7 @@ public class MusicListActivity extends AppCompatActivity implements tab3.OnFragm
     private TabItem tabItem1, tabItem2, tabItem3;
     private MusicTabsAdapter pagerAdapter;
     public ViewPager viewPager;
+    private Context mContext;
     @BindView(R.id.share_app) TextView share;
     private static final boolean AUTO_HIDE = true;
     private static final int AUTO_HIDE_DELAY_MILLIS = 3000;
@@ -82,7 +100,7 @@ public class MusicListActivity extends AppCompatActivity implements tab3.OnFragm
 
         setContentView(R.layout.activity_music_list);
         ButterKnife.bind(this);
-
+        externalStoragePermission();
         shareWithFriends();
         mVisible = true;
         mControlsView = findViewById(R.id.fullscreen_content_controls);
@@ -134,6 +152,24 @@ public class MusicListActivity extends AppCompatActivity implements tab3.OnFragm
         });
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
+    }
+    public void externalStoragePermission(){
+        Dexter.withActivity(this)
+                .withPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                .withListener(new PermissionListener() {
+                    @Override
+                    public void onPermissionGranted(PermissionGrantedResponse response) {
+
+                    }
+                    @Override
+                    public void onPermissionDenied(PermissionDeniedResponse response) {
+
+                    }
+                    @Override
+                    public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {
+                        token.continuePermissionRequest();
+                    }
+                }).check();
     }
 
     private void shareWithFriends() {

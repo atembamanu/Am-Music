@@ -7,10 +7,14 @@
     tools:context=".Fragments.tab3">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+        android:id="@+id/localRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:listitem="@layout/song_list"
-        />
+        android:paddingStart="15sp"
+        android:paddingLeft="15sp"
+        android:paddingRight="6sp"
+        android:paddingEnd="6sp"
+        android:layout_marginTop="10dp"
+        tools:listitem="@layout/local_list" />
 
 </FrameLayout>
