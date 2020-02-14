@@ -5,9 +5,11 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -19,6 +21,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import com.blueman.ammusic.Adapters.LocalTracksAdapter;
 import com.blueman.ammusic.Adapters.MusicTabsAdapter;
 import com.blueman.ammusic.Fragments.tab3;
 import com.blueman.ammusic.Models.LocalAudioTracks;
@@ -41,7 +44,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MusicListActivity extends AppCompatActivity implements tab3.OnFragmentInteractionListener {
+public class MusicListActivity extends AppCompatActivity implements tab3.OnFragmentInteractionListener, LocalTracksAdapter.OnLocalSongsListener {
 
     //TODO Bind all views using butterknife
     private TabLayout tabLayout;
@@ -73,7 +76,9 @@ public class MusicListActivity extends AppCompatActivity implements tab3.OnFragm
     private static final String TAG = "MusicListActivity";
     List<LocalAudioTracks> tracks;
     LocalSharedPreferences localSharedPreferences;
-    Activity activity;
+    private MediaPlayer mediaPlayer;
+
+
     private final Runnable mHidePart2Runnable = new Runnable() {
         @SuppressLint("InlinedApi")
         @Override
@@ -132,15 +137,6 @@ public class MusicListActivity extends AppCompatActivity implements tab3.OnFragm
         localSharedPreferences = new LocalSharedPreferences();
         tracks = localSharedPreferences.getLocalSongs(getApplicationContext());
 
-        if (tracks == null ){
-            Toast.makeText(getApplicationContext(), "Loading", Toast.LENGTH_SHORT).show();
-        }else {
-            if(tracks.size() == 0){
-                Toast.makeText(getApplicationContext(), "Loading", Toast.LENGTH_SHORT).show();
-            }
-            songsTitle.setText(tracks.get(1).getName());
-            songsArtist.setText(tracks.get(1).gtaArtist());
-        }
 
 
         tabLayout = findViewById(R.id.tabLayout);
@@ -351,5 +347,26 @@ public class MusicListActivity extends AppCompatActivity implements tab3.OnFragm
         } else {
             super.onBackPressed();
         }
+    }
+
+
+    @Override
+    public void onLocalSongsListener(LocalAudioTracks localAudioTracks, String path,  int position) {
+        songsTitle.setEllipsize(TextUtils.TruncateAt.MARQUEE);
+        songsTitle.setText(localAudioTracks.getName());
+        songsTitle.setSelected(true);
+        songsTitle.setSingleLine(true);
+        songsArtist.setText(localAudioTracks.gtaArtist());
+
+
+        if (mediaPlayer != null) {
+            mediaPlayer.stop();
+            mediaPlayer.release();
+        }
+            Uri uri = Uri.parse(path);
+            Log.d(TAG, "onLocalSongsListener: "+ uri.toString());
+            mediaPlayer = MediaPlayer.create(MusicListActivity.this, uri);
+            mediaPlayer.start();
+
     }
 }

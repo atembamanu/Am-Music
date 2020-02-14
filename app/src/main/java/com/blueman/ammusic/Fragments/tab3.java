@@ -46,6 +46,7 @@ public class tab3 extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+    private LocalTracksAdapter.OnLocalSongsListener localSongsListener;
 
     public tab3() {
     }
@@ -75,7 +76,7 @@ public class tab3 extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
 
         List<LocalAudioTracks> musicFound= getLocalMusic();
-        LocalTracksAdapter localTracksAdapter = new LocalTracksAdapter(getContext(), musicFound);
+        LocalTracksAdapter localTracksAdapter = new LocalTracksAdapter(getContext(), musicFound, localSongsListener);
         recyclerView.setAdapter(localTracksAdapter);
 
         if (getArguments() != null) {
@@ -104,6 +105,8 @@ public class tab3 extends Fragment {
                     (android.provider.MediaStore.Audio.Media.ARTIST);
             int albumColumn = c.getColumnIndex
                     (MediaStore.Audio.Media.ALBUM);
+            int path = c.getColumnIndex
+                    (MediaStore.Audio.Media.DATA);
             //add songs to list
             do {
 
@@ -112,10 +115,12 @@ public class tab3 extends Fragment {
                 String thisTitle = c.getString(titleColumn);
                 String thisArtist = c.getString(artistColumn);
                 String thisAlbum = c.getString(albumColumn);
+                String thisPath = c.getString(path);
 
                 audioModel.setName(thisTitle);
                 audioModel.setAlbum(thisAlbum);
                 audioModel.setArtist(thisArtist);
+                audioModel.setPath(thisPath);
 
                 tempAudioList.add(audioModel);
             }
@@ -137,6 +142,13 @@ public class tab3 extends Fragment {
         super.onAttach(context);
         if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnFragmentInteractionListener");
+        }
+
+        if (context instanceof LocalTracksAdapter.OnLocalSongsListener) {
+            localSongsListener = (LocalTracksAdapter.OnLocalSongsListener) context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");

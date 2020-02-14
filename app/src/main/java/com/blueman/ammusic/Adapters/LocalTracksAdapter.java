@@ -26,14 +26,19 @@ public class LocalTracksAdapter extends RecyclerView.Adapter<LocalTracksAdapter.
 
     private List<LocalAudioTracks> localAudioTracks;
     private Context mContext;
+    private OnLocalSongsListener listener;
     private LayoutInflater inflater;
     Activity activity;
     LocalSharedPreferences localSharedPreferences;
 
+    public interface OnLocalSongsListener {
+        void onLocalSongsListener(LocalAudioTracks localAudioTracks, String path, int position);
+    }
 
-    public LocalTracksAdapter(Context mContext, List<LocalAudioTracks> localAudioTracks) {
+    public LocalTracksAdapter(Context mContext, List<LocalAudioTracks> localAudioTracks, OnLocalSongsListener listener) {
         this.localAudioTracks = localAudioTracks;
         this.mContext = mContext;
+        this.listener = listener;
         inflater = LayoutInflater.from(mContext);
         localSharedPreferences = new LocalSharedPreferences();
     }
@@ -73,8 +78,9 @@ public class LocalTracksAdapter extends RecyclerView.Adapter<LocalTracksAdapter.
 
         @Override
         public void onClick(View v) {
-
             int itemPosition = getLayoutPosition();
+            listener.onLocalSongsListener(localAudioTracks.get(itemPosition), localAudioTracks.get(itemPosition).getPath(),  itemPosition);
+
             localSharedPreferences.addSong(mContext, localAudioTracks.get(itemPosition));
 
 

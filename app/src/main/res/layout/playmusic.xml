@@ -63,10 +63,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-condensed"
-                    android:lines="1"
                     android:text="@string/camila"
+                    android:scrollHorizontally="true"
                     android:textColor="@color/tectColor"
-                    android:textSize="22sp" />
+                    android:textSize="19sp" />
 
                 <TextView
                     android:id="@+id/songs_artist_name"
