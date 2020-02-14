@@ -44,7 +44,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MusicListActivity extends AppCompatActivity implements tab3.OnFragmentInteractionListener, LocalTracksAdapter.OnLocalSongsListener {
+public class MusicListActivity extends AppCompatActivity implements tab3.OnFragmentInteractionListener, LocalTracksAdapter.OnLocalSongsListener, View.OnClickListener {
 
     //TODO Bind all views using butterknife
     private TabLayout tabLayout;
@@ -173,94 +173,6 @@ public class MusicListActivity extends AppCompatActivity implements tab3.OnFragm
         });
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
-        like.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                notlike.setVisibility(View.VISIBLE);
-                Toast.makeText(MusicListActivity.this,"You Like the Song",Toast.LENGTH_SHORT).show();
-                if (notdislike.getVisibility() == View.VISIBLE){
-                    notdislike.setVisibility(View.GONE);
-                }
-            }
-        });
-
-        notlike.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                notlike.setVisibility(View.GONE);
-            }
-        });
-
-        dislike.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                notdislike.setVisibility(View.VISIBLE);
-                Toast.makeText(MusicListActivity.this,"You DisLike the Song",Toast.LENGTH_SHORT).show();
-                if (notlike.getVisibility() == View.VISIBLE){
-                    notlike.setVisibility(View.GONE);
-                }
-            }
-        });
-
-        notdislike.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                notdislike.setVisibility(View.GONE);
-            }
-        });
-
-        play.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                play.setVisibility(View.GONE);
-                pause.setVisibility(View.VISIBLE);
-                Toast.makeText(MusicListActivity.this,"Song Is now Playing",Toast.LENGTH_SHORT).show();
-                if (play_main.getVisibility() == View.VISIBLE){
-                    play_main.setVisibility(View.GONE);
-                    pause_main.setVisibility(View.VISIBLE);
-                }
-
-            }
-        });
-
-        pause.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                pause.setVisibility(View.GONE);
-                play.setVisibility(View.VISIBLE);
-                Toast.makeText(MusicListActivity.this,"Song is Pause",Toast.LENGTH_SHORT).show();
-                if (pause_main.getVisibility() == View.VISIBLE){
-                    pause_main.setVisibility(View.GONE);
-                    play_main.setVisibility(View.VISIBLE);
-                }
-            }
-        });
-
-        play_main.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                play_main.setVisibility(View.GONE);
-                pause_main.setVisibility(View.VISIBLE);
-                Toast.makeText(MusicListActivity.this,"Song Is now Playing",Toast.LENGTH_SHORT).show();
-                if (play.getVisibility() == View.VISIBLE){
-                    play.setVisibility(View.GONE);
-                    pause.setVisibility(View.VISIBLE);
-                }
-            }
-        });
-
-        pause_main.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                pause_main.setVisibility(View.GONE);
-                play_main.setVisibility(View.VISIBLE);
-                Toast.makeText(MusicListActivity.this,"Song is Pause",Toast.LENGTH_SHORT).show();
-                if (pause.getVisibility() == View.VISIBLE){
-                    pause.setVisibility(View.GONE);
-                    play.setVisibility(View.VISIBLE);
-                }
-            }
-        });
     }
     public void externalStoragePermission(){
         Dexter.withActivity(this)
@@ -368,5 +280,71 @@ public class MusicListActivity extends AppCompatActivity implements tab3.OnFragm
             mediaPlayer = MediaPlayer.create(MusicListActivity.this, uri);
             mediaPlayer.start();
 
+    }
+
+    @Override
+    public void onClick(View v) {
+        int id = v.getId();
+        switch (id){
+            case R.id.imageButton2:
+                notlike.setVisibility(View.VISIBLE);
+                Toast.makeText(MusicListActivity.this,"You Like the Song",Toast.LENGTH_SHORT).show();
+                if (notdislike.getVisibility() == View.VISIBLE){
+                    notdislike.setVisibility(View.GONE);
+                }
+                break;
+            case R.id.imageButton2new:
+                notlike.setVisibility(View.GONE);
+                break;
+            case R.id.button:
+                notdislike.setVisibility(View.VISIBLE);
+                Toast.makeText(MusicListActivity.this,"You DisLike the Song",Toast.LENGTH_SHORT).show();
+                if (notlike.getVisibility() == View.VISIBLE){
+                    notlike.setVisibility(View.GONE);
+                }
+                break;
+            case R.id.buttontwo:
+                notdislike.setVisibility(View.GONE);
+                break;
+            case R.id.play_button:
+                play.setVisibility(View.GONE);
+                pause.setVisibility(View.VISIBLE);
+                Toast.makeText(MusicListActivity.this,"Song Is now Playing",Toast.LENGTH_SHORT).show();
+                if (play_main.getVisibility() == View.VISIBLE){
+                    play_main.setVisibility(View.GONE);
+                    pause_main.setVisibility(View.VISIBLE);
+                }
+                break;
+            case R.id.pause_button:
+                pause.setVisibility(View.GONE);
+                play.setVisibility(View.VISIBLE);
+                Toast.makeText(MusicListActivity.this,"Song is Pause",Toast.LENGTH_SHORT).show();
+                if (pause_main.getVisibility() == View.VISIBLE){
+                    pause_main.setVisibility(View.GONE);
+                    play_main.setVisibility(View.VISIBLE);
+                }
+                break;
+            case  R.id.play_button_main:
+                play_main.setVisibility(View.GONE);
+                pause_main.setVisibility(View.VISIBLE);
+                Toast.makeText(MusicListActivity.this,"Song Is now Playing",Toast.LENGTH_SHORT).show();
+                if (play.getVisibility() == View.VISIBLE){
+                    play.setVisibility(View.GONE);
+                    pause.setVisibility(View.VISIBLE);
+                }
+                break;
+            case R.id.pause_button_main:
+                pause_main.setVisibility(View.GONE);
+                play_main.setVisibility(View.VISIBLE);
+                Toast.makeText(MusicListActivity.this,"Song is Pause",Toast.LENGTH_SHORT).show();
+                if (pause.getVisibility() == View.VISIBLE){
+                    pause.setVisibility(View.GONE);
+                    play.setVisibility(View.VISIBLE);
+                }
+                break;
+                default:
+
+
+        }
     }
 }
