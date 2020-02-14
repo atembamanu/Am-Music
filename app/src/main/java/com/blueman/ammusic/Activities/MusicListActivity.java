@@ -2,6 +2,7 @@ package com.blueman.ammusic.Activities;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -22,6 +23,7 @@ import com.blueman.ammusic.Adapters.MusicTabsAdapter;
 import com.blueman.ammusic.Fragments.tab3;
 import com.blueman.ammusic.Models.LocalAudioTracks;
 import com.blueman.ammusic.R;
+import com.blueman.ammusic.Utils.LocalSharedPreferences;
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 import com.karumi.dexter.Dexter;
@@ -47,6 +49,9 @@ public class MusicListActivity extends AppCompatActivity implements tab3.OnFragm
     private MusicTabsAdapter pagerAdapter;
     public ViewPager viewPager;
 
+    @BindView(R.id.songs_title) TextView songsTitle;
+    @BindView(R.id.songs_artist_name) TextView songsArtist;
+
     @BindView(R.id.imageButton2) ImageButton like;
     @BindView(R.id.imageButton2new) ImageButton notlike;
     @BindView(R.id.button) ImageButton dislike;
@@ -67,7 +72,8 @@ public class MusicListActivity extends AppCompatActivity implements tab3.OnFragm
     private View mContentView;
     private static final String TAG = "MusicListActivity";
     List<LocalAudioTracks> tracks;
-    private int selectedSong;
+    LocalSharedPreferences localSharedPreferences;
+    Activity activity;
     private final Runnable mHidePart2Runnable = new Runnable() {
         @SuppressLint("InlinedApi")
         @Override
@@ -117,27 +123,24 @@ public class MusicListActivity extends AppCompatActivity implements tab3.OnFragm
         ButterKnife.bind(this);
         externalStoragePermission();
         shareWithFriends();
+
         mVisible = true;
         mControlsView = findViewById(R.id.fullscreen_content_controls);
         mContentView = findViewById(R.id.fullscreen_content);
         findViewById(R.id.dummy_button).setOnTouchListener(mDelayHideTouchListener);
 
-        //Check if getIntent has Extras
-        if(getIntent().hasExtra("position")){
-            selectedSong = getIntent().getIntExtra("position", 0);
-            Log.d(TAG, ">>>>>>>>>>"+selectedSong);
-            
+        localSharedPreferences = new LocalSharedPreferences();
+        tracks = localSharedPreferences.getLocalSongs(getApplicationContext());
+
+        if (tracks == null ){
+            Toast.makeText(getApplicationContext(), "Loading", Toast.LENGTH_SHORT).show();
+        }else {
+            if(tracks.size() == 0){
+                Toast.makeText(getApplicationContext(), "Loading", Toast.LENGTH_SHORT).show();
+            }
+            songsTitle.setText(tracks.get(1).getName());
+            songsArtist.setText(tracks.get(1).gtaArtist());
         }
-        if(getIntent().hasExtra("onlineSongs")){
-            tracks = Parcels.unwrap(getIntent().getParcelableExtra("onlineSongs"));
-            Log.d(TAG, ">>>>>>>>>>>"+tracks);
-        }
-
-
-
-
-
-
 
 
         tabLayout = findViewById(R.id.tabLayout);

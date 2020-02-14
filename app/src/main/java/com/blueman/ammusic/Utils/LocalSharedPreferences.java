@@ -2,6 +2,7 @@ package com.blueman.ammusic.Utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 
 import com.blueman.ammusic.Models.LocalAudioTracks;
 import com.google.gson.Gson;
@@ -13,8 +14,7 @@ import java.util.List;
 public class LocalSharedPreferences {
     public static final String PREFS_NAME = "local_MUSIC";
     public static final String SONGS = "Local_Music_List";
-
-
+    Context context;
     public LocalSharedPreferences() {
         super();
     }
@@ -53,7 +53,7 @@ public class LocalSharedPreferences {
         }
     }
 
-    private ArrayList<LocalAudioTracks> getLocalSongs(Context context) {
+    public ArrayList<LocalAudioTracks> getLocalSongs(Context context) {
         SharedPreferences settings;
         List<LocalAudioTracks> localAudioTracks;
 

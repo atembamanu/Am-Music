@@ -1,5 +1,6 @@
 package com.blueman.ammusic.Adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.blueman.ammusic.Activities.MusicListActivity;
 import com.blueman.ammusic.Models.LocalAudioTracks;
 import com.blueman.ammusic.R;
+import com.blueman.ammusic.Utils.LocalSharedPreferences;
 
 import org.parceler.Parcels;
 
@@ -25,16 +27,15 @@ public class LocalTracksAdapter extends RecyclerView.Adapter<LocalTracksAdapter.
     private List<LocalAudioTracks> localAudioTracks;
     private Context mContext;
     private LayoutInflater inflater;
+    Activity activity;
+    LocalSharedPreferences localSharedPreferences;
 
-    private static SharedPreferences sharedPreferences;
-    private static SharedPreferences.Editor editor;
-    private static final String PREFS_TAG = "SharedPrefs";
-    private static final String PRODUCT_TAG = "localSongs";
 
     public LocalTracksAdapter(Context mContext, List<LocalAudioTracks> localAudioTracks) {
         this.localAudioTracks = localAudioTracks;
         this.mContext = mContext;
         inflater = LayoutInflater.from(mContext);
+        localSharedPreferences = new LocalSharedPreferences();
     }
 
     @NonNull
@@ -49,6 +50,8 @@ public class LocalTracksAdapter extends RecyclerView.Adapter<LocalTracksAdapter.
 
         holder.localSongName.setText(localAudioTracks.get(position).getName());
         holder.localArtist.setText(localAudioTracks.get(position).gtaArtist());
+
+        localSharedPreferences.addSong(mContext, localAudioTracks.get(position));
     }
 
     @Override
@@ -72,8 +75,7 @@ public class LocalTracksAdapter extends RecyclerView.Adapter<LocalTracksAdapter.
         public void onClick(View v) {
 
             int itemPosition = getLayoutPosition();
-            sharedPreferences = mContext.getSharedPreferences(PREFS_TAG, Context.MODE_PRIVATE);
-            editor = sharedPreferences.edit();
+            localSharedPreferences.addSong(mContext, localAudioTracks.get(itemPosition));
 
 
         }
