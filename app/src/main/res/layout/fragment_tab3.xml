@@ -5,6 +5,14 @@
     android:layout_height="match_parent"
     android:background="@color/colorWhite"
     tools:context=".Fragments.tab3">
+    <ProgressBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_margin="16dp"
+        android:visibility="invisible"
+        tools:visibility="visible"
+        android:id="@+id/progress_horizontal"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/localRecyclerView"

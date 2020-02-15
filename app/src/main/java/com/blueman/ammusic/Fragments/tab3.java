@@ -4,6 +4,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -27,14 +28,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link tab3.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link tab3#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class tab3 extends Fragment {
 
     private RecyclerView recyclerView;
@@ -45,22 +38,12 @@ public class tab3 extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    private List<LocalAudioTracks> musicFound;
     private OnFragmentInteractionListener mListener;
     private LocalTracksAdapter.OnLocalSongsListener localSongsListener;
 
     public tab3() {
     }
-
-    // TODO: Rename and change types and number of parameters
-    public static tab3 newInstance(String param1, String param2) {
-        tab3 fragment = new tab3();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,9 +58,7 @@ public class tab3 extends Fragment {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
 
-        List<LocalAudioTracks> musicFound= getLocalMusic();
-        LocalTracksAdapter localTracksAdapter = new LocalTracksAdapter(getContext(), musicFound, localSongsListener);
-        recyclerView.setAdapter(localTracksAdapter);
+        new GetUserSongs().execute();
 
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
@@ -87,11 +68,12 @@ public class tab3 extends Fragment {
 
         return view;
     }
+    private class GetUserSongs extends AsyncTask< Void, Integer, List<LocalAudioTracks>>{
 
-    private List<LocalAudioTracks> getLocalMusic() {
-        List<LocalAudioTracks> tempAudioList = new ArrayList<>();
+        @Override
+        protected List<LocalAudioTracks> doInBackground(Void... voids) {
+            List<LocalAudioTracks> tempAudioList = new ArrayList<>();
         ContentResolver contentResolver = Objects.requireNonNull(getActivity()).getContentResolver();
-        String selection = MediaStore.Audio.Media.IS_MUSIC + " != 0";
         Uri uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
         Cursor c = contentResolver.query(uri, null, null, null, null);
 
@@ -125,15 +107,28 @@ public class tab3 extends Fragment {
                 tempAudioList.add(audioModel);
             }
             while (c.moveToNext());
+            c.close();
         }
+
         return  tempAudioList;
-    }
+        }
 
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
+        @Override
+        protected void onPostExecute(List<LocalAudioTracks> localAudioTracks) {
+            super.onPostExecute(localAudioTracks);
+            musicFound = localAudioTracks;
+            LocalTracksAdapter localTracksAdapter = new LocalTracksAdapter(getContext(), musicFound, localSongsListener);
+            recyclerView.setAdapter(localTracksAdapter);
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+            super.onProgressUpdate(values);
         }
     }
 
@@ -160,11 +155,9 @@ public class tab3 extends Fragment {
         super.onDetach();
         mListener = null;
     }
-    //TODO check out this link http://developer.android.com/training/basics/fragments/communicating.html
 
 
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
 }
