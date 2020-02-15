@@ -52,22 +52,34 @@ public class MusicListActivity extends AppCompatActivity implements tab3.OnFragm
     private MusicTabsAdapter pagerAdapter;
     public ViewPager viewPager;
 
-    @BindView(R.id.songs_title) TextView songsTitle;
-    @BindView(R.id.songs_artist_name) TextView songsArtist;
+    @BindView(R.id.songs_title)
+    TextView songsTitle;
+    @BindView(R.id.songs_artist_name)
+    TextView songsArtist;
 
-    @BindView(R.id.imageButton2) ImageButton like;
-    @BindView(R.id.imageButton2new) ImageButton notlike;
-    @BindView(R.id.button) ImageButton dislike;
-    @BindView(R.id.buttontwo) ImageButton notdislike;
+    @BindView(R.id.imageButton2)
+    ImageButton like;
+    @BindView(R.id.imageButton2new)
+    ImageButton notlike;
+    @BindView(R.id.button)
+    ImageButton dislike;
+    @BindView(R.id.buttontwo)
+    ImageButton notdislike;
 
-    @BindView(R.id.play_button) ImageButton play;
-    @BindView(R.id.pause_button) ImageButton pause;
-    @BindView(R.id.play_button_main) ImageButton play_main;
-    @BindView(R.id.pause_button_main) ImageButton pause_main;
+    @BindView(R.id.play_button)
+    ImageButton play;
+    @BindView(R.id.pause_button)
+    ImageButton pause;
+    @BindView(R.id.play_button_main)
+    ImageButton play_main;
+    @BindView(R.id.pause_button_main)
+    ImageButton pause_main;
 
-    @BindView(R.id.activity_main) SlidingUpPanelLayout mLayout;
+    @BindView(R.id.activity_main)
+    SlidingUpPanelLayout mLayout;
     private Context mContext;
-    @BindView(R.id.share_app) TextView share;
+    @BindView(R.id.share_app)
+    TextView share;
     private static final boolean AUTO_HIDE = true;
     private static final int AUTO_HIDE_DELAY_MILLIS = 3000;
     private static final int UI_ANIMATION_DELAY = 400;
@@ -137,6 +149,15 @@ public class MusicListActivity extends AppCompatActivity implements tab3.OnFragm
         localSharedPreferences = new LocalSharedPreferences();
         tracks = localSharedPreferences.getLocalSongs(getApplicationContext());
 
+        play.setOnClickListener(this);
+        play_main.setOnClickListener(this);
+        pause.setOnClickListener(this);
+        pause_main.setOnClickListener(this);
+
+        like.setOnClickListener(this);
+        dislike.setOnClickListener(this);
+        notdislike.setOnClickListener(this);
+        dislike.setOnClickListener(this);
 
 
         tabLayout = findViewById(R.id.tabLayout);
@@ -152,11 +173,11 @@ public class MusicListActivity extends AppCompatActivity implements tab3.OnFragm
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tab.getPosition());
-                if(tab.getPosition()==0){
+                if (tab.getPosition() == 0) {
                     pagerAdapter.notifyDataSetChanged();
-                }else if (tab.getPosition() == 1){
+                } else if (tab.getPosition() == 1) {
                     pagerAdapter.notifyDataSetChanged();
-                }else if(tab.getPosition() == 2) {
+                } else if (tab.getPosition() == 2) {
                     pagerAdapter.notifyDataSetChanged();
                 }
             }
@@ -174,7 +195,8 @@ public class MusicListActivity extends AppCompatActivity implements tab3.OnFragm
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
     }
-    public void externalStoragePermission(){
+
+    public void externalStoragePermission() {
         Dexter.withActivity(this)
                 .withPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
                 .withListener(new PermissionListener() {
@@ -182,10 +204,12 @@ public class MusicListActivity extends AppCompatActivity implements tab3.OnFragm
                     public void onPermissionGranted(PermissionGrantedResponse response) {
 
                     }
+
                     @Override
                     public void onPermissionDenied(PermissionDeniedResponse response) {
 
                     }
+
                     @Override
                     public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {
                         token.continuePermissionRequest();
@@ -210,6 +234,7 @@ public class MusicListActivity extends AppCompatActivity implements tab3.OnFragm
         super.onPostCreate(savedInstanceState);
         delayedHide(100);
     }
+
     private void hide() {
         // Hide UI first
         ActionBar actionBar = getSupportActionBar();
@@ -241,6 +266,7 @@ public class MusicListActivity extends AppCompatActivity implements tab3.OnFragm
         mHideHandler.removeCallbacks(mHidePart2Runnable);
         mHideHandler.postDelayed(mShowPart2Runnable, UI_ANIMATION_DELAY);
     }
+
     private void delayedHide(int delayMillis) {
         mHideHandler.removeCallbacks(mHideRunnable);
         mHideHandler.postDelayed(mHideRunnable, delayMillis);
@@ -263,7 +289,7 @@ public class MusicListActivity extends AppCompatActivity implements tab3.OnFragm
 
 
     @Override
-    public void onLocalSongsListener(LocalAudioTracks localAudioTracks, String path,  int position) {
+    public void onLocalSongsListener(LocalAudioTracks localAudioTracks, String path, int position) {
         songsTitle.setEllipsize(TextUtils.TruncateAt.MARQUEE);
         songsTitle.setText(localAudioTracks.getName());
         songsTitle.setSelected(true);
@@ -275,74 +301,86 @@ public class MusicListActivity extends AppCompatActivity implements tab3.OnFragm
             mediaPlayer.stop();
             mediaPlayer.release();
         }
-            Uri uri = Uri.parse(path);
-            Log.d(TAG, "onLocalSongsListener: "+ uri.toString());
-            mediaPlayer = MediaPlayer.create(MusicListActivity.this, uri);
-            mediaPlayer.start();
+        Uri uri = Uri.parse(path);
+        Log.d(TAG, "onLocalSongsListener: " + uri.toString());
+        mediaPlayer = MediaPlayer.create(MusicListActivity.this, uri);
+        play.setVisibility(View.GONE);
+        pause.setVisibility(View.VISIBLE);
+        mediaPlayer.start();
 
     }
 
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        switch (id){
+        switch (id) {
+            //like the song
             case R.id.imageButton2:
                 notlike.setVisibility(View.VISIBLE);
-                Toast.makeText(MusicListActivity.this,"You Like the Song",Toast.LENGTH_SHORT).show();
-                if (notdislike.getVisibility() == View.VISIBLE){
+                Toast.makeText(MusicListActivity.this, "You Like the Song", Toast.LENGTH_SHORT).show();
+                if (notdislike.getVisibility() == View.VISIBLE) {
                     notdislike.setVisibility(View.GONE);
                 }
                 break;
+            //not-like the song
             case R.id.imageButton2new:
                 notlike.setVisibility(View.GONE);
                 break;
+            //dislike the song
             case R.id.button:
                 notdislike.setVisibility(View.VISIBLE);
-                Toast.makeText(MusicListActivity.this,"You DisLike the Song",Toast.LENGTH_SHORT).show();
-                if (notlike.getVisibility() == View.VISIBLE){
+                Toast.makeText(MusicListActivity.this, "You DisLike the Song", Toast.LENGTH_SHORT).show();
+                if (notlike.getVisibility() == View.VISIBLE) {
                     notlike.setVisibility(View.GONE);
                 }
                 break;
+            //no-dislike the song
             case R.id.buttontwo:
                 notdislike.setVisibility(View.GONE);
                 break;
+            //play the song
             case R.id.play_button:
                 play.setVisibility(View.GONE);
                 pause.setVisibility(View.VISIBLE);
-                Toast.makeText(MusicListActivity.this,"Song Is now Playing",Toast.LENGTH_SHORT).show();
-                if (play_main.getVisibility() == View.VISIBLE){
+
+                Toast.makeText(MusicListActivity.this, "Song Is now Playing", Toast.LENGTH_SHORT).show();
+                if (play_main.getVisibility() == View.VISIBLE) {
                     play_main.setVisibility(View.GONE);
                     pause_main.setVisibility(View.VISIBLE);
                 }
                 break;
+            //pause the song
             case R.id.pause_button:
                 pause.setVisibility(View.GONE);
                 play.setVisibility(View.VISIBLE);
-                Toast.makeText(MusicListActivity.this,"Song is Pause",Toast.LENGTH_SHORT).show();
-                if (pause_main.getVisibility() == View.VISIBLE){
+                mediaPlayer.pause();
+//                Toast.makeText(MusicListActivity.this, "Song is Pause", Toast.LENGTH_SHORT).show();
+                if (pause_main.getVisibility() == View.VISIBLE) {
                     pause_main.setVisibility(View.GONE);
                     play_main.setVisibility(View.VISIBLE);
                 }
                 break;
-            case  R.id.play_button_main:
+            //play from the play-main button
+            case R.id.play_button_main:
                 play_main.setVisibility(View.GONE);
                 pause_main.setVisibility(View.VISIBLE);
-                Toast.makeText(MusicListActivity.this,"Song Is now Playing",Toast.LENGTH_SHORT).show();
-                if (play.getVisibility() == View.VISIBLE){
+                Toast.makeText(MusicListActivity.this, "Song Is now Playing", Toast.LENGTH_SHORT).show();
+                if (play.getVisibility() == View.VISIBLE) {
                     play.setVisibility(View.GONE);
                     pause.setVisibility(View.VISIBLE);
                 }
                 break;
+            //pause the song form the main pause-button
             case R.id.pause_button_main:
                 pause_main.setVisibility(View.GONE);
                 play_main.setVisibility(View.VISIBLE);
-                Toast.makeText(MusicListActivity.this,"Song is Pause",Toast.LENGTH_SHORT).show();
-                if (pause.getVisibility() == View.VISIBLE){
+                Toast.makeText(MusicListActivity.this, "Song is Pause", Toast.LENGTH_SHORT).show();
+                if (pause.getVisibility() == View.VISIBLE) {
                     pause.setVisibility(View.GONE);
                     play.setVisibility(View.VISIBLE);
                 }
                 break;
-                default:
+            default:
 
 
         }
