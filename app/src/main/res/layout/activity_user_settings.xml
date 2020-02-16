@@ -1,0 +1,403 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    tools:context=".Activities.UserSettingsActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_marginTop="24dp"
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:elevation="0dp"
+        android:background="@color/colorTransparent"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:theme="@style/backToParentTheme"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <TextView
+        android:id="@+id/accounts"
+        android:layout_width="wrap_content"
+        android:layout_below="@id/appbar"
+        android:layout_marginLeft="10dp"
+        android:text="@string/account_info"
+        android:textColor="#000"
+        android:layout_marginTop="15dp"
+        android:visibility="gone"
+        android:layout_height="wrap_content"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        android:layout_marginStart="10dp" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/userPhoto"
+        android:layout_width="wrap_content"
+        android:src="@drawable/user_"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_below="@id/accounts"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp" />
+
+    <TextView
+        android:id="@+id/userEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/accounts"
+        android:layout_marginLeft="10dp"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="10dp"
+        android:text="@string/email"
+        android:textColor="#000"
+        android:gravity="center"
+        android:layout_toRightOf="@id/userPhoto"
+        android:layout_toEndOf="@id/userPhoto"
+        android:layout_marginStart="10dp" />
+    <TextView
+        android:id="@+id/userName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/userEmail"
+        android:layout_marginLeft="10dp"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="7dp"
+        android:text="@string/user_name"
+        android:textColor="#000"
+        android:gravity="center"
+        android:layout_toRightOf="@id/userPhoto"
+        android:layout_toEndOf="@id/userPhoto"
+        android:layout_marginStart="10dp" />
+
+    <TextView
+        android:id="@+id/logout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/userEmail"
+        android:layout_marginTop="10dp"
+        android:text="@string/logout"
+        android:textColor="#000"
+        android:gravity="center"
+        android:drawableRight="@drawable/ic_logout"
+        android:layout_alignParentRight="true"
+        android:drawableEnd="@drawable/ic_logout"
+        android:layout_marginRight="10dp"
+        android:drawablePadding="7dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="10dp" />
+
+    <View
+        android:id="@+id/endAccount"
+        android:layout_below="@id/userPhoto"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_margin="10dp"
+        android:background="#ededed"
+        />
+
+ <androidx.core.widget.NestedScrollView
+     android:layout_width="wrap_content"
+     android:id="@+id/beginDashboard"
+     android:layout_below="@id/endAccount"
+     android:layout_height="wrap_content">
+     <RelativeLayout
+         android:layout_width="match_parent"
+         android:layout_height="match_parent">
+         <androidx.cardview.widget.CardView
+             android:id="@+id/online_fav_songs"
+             android:layout_width="140dp"
+             android:layout_height="140dp"
+             android:layout_marginStart="8dp"
+             android:layout_marginTop="8dp"
+             app:cardBackgroundColor="#fff"
+             app:cardCornerRadius="10dp"
+             android:layout_marginLeft="8dp">
+
+             <ImageView
+                 android:layout_width="wrap_content"
+                 android:layout_gravity="top|center"
+                 android:src="@drawable/mfavourite"
+                 android:layout_height="wrap_content"
+                 android:layout_marginBottom="60dp"
+                 android:contentDescription="@string/cards" />
+             <TextView
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:text="@string/favourite_songs"
+                 android:gravity="center"
+                 android:id="@+id/onlineFavTitle"
+                 android:textStyle="bold"
+                 android:textColor="@color/black_shade"
+                 android:layout_gravity="bottom|center"
+                 android:layout_marginBottom="40dp"/>
+             <TextView
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:text="@string/no_data"
+                 android:gravity="center"
+                 android:id="@+id/onlineFavCount"
+                 android:textColor="@color/black_shade"
+                 style="@style/TextAppearance.AppCompat.Small"
+                 android:layout_gravity="bottom|center"
+                 android:layout_marginBottom="20dp"/>
+
+
+         </androidx.cardview.widget.CardView>
+
+         <androidx.cardview.widget.CardView
+             android:id="@+id/online_custom_songs"
+             android:layout_width="140dp"
+             android:layout_height="140dp"
+             android:layout_marginStart="8dp"
+             android:layout_below="@id/endAccount"
+             android:layout_toRightOf="@id/online_fav_songs"
+             android:layout_marginTop="8dp"
+             app:cardBackgroundColor="#fff"
+             app:cardCornerRadius="10dp"
+             android:layout_marginLeft="8dp"
+             android:layout_toEndOf="@id/online_fav_songs">
+
+             <ImageView
+                 android:layout_width="wrap_content"
+                 android:layout_gravity="top|center"
+                 android:src="@drawable/custom"
+                 android:layout_marginBottom="60dp"
+                 android:layout_height="wrap_content"
+                 android:contentDescription="@string/cards" />
+             <TextView
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:text="@string/favourite_genres"
+                 android:gravity="center"
+                 android:id="@+id/onlineCustomTitle"
+                 android:textStyle="bold"
+                 android:textColor="@color/black_shade"
+                 android:layout_gravity="bottom|center"
+                 android:layout_marginBottom="40dp"/>
+             <TextView
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:text="@string/no_data"
+                 android:gravity="center"
+                 android:id="@+id/onlineCustomCount"
+                 android:textColor="@color/black_shade"
+                 style="@style/TextAppearance.AppCompat.Small"
+                 android:layout_gravity="bottom|center"
+                 android:layout_marginBottom="20dp"/>
+
+
+         </androidx.cardview.widget.CardView>
+
+         <androidx.cardview.widget.CardView
+             android:id="@+id/online_favMusician_songs"
+             android:layout_width="140dp"
+             android:layout_height="140dp"
+             android:layout_marginStart="8dp"
+             android:layout_below="@id/online_fav_songs"
+             android:layout_marginTop="8dp"
+             app:cardBackgroundColor="#fff"
+             app:cardCornerRadius="10dp"
+             android:layout_marginLeft="8dp">
+
+             <ImageView
+                 android:layout_width="wrap_content"
+                 android:layout_gravity="top|center"
+                 android:src="@drawable/musician"
+                 android:layout_height="wrap_content"
+                 android:layout_marginBottom="60dp"
+                 android:contentDescription="@string/cards" />
+             <TextView
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:text="@string/favourite_musician"
+                 android:gravity="center"
+                 android:id="@+id/onlineFavMusicianTitle"
+                 android:textStyle="bold"
+                 android:textColor="@color/black_shade"
+                 android:layout_gravity="bottom|center"
+                 android:layout_marginBottom="40dp"/>
+             <TextView
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:text="@string/no_data"
+                 android:gravity="center"
+                 android:id="@+id/onlineFavMusicianCount"
+                 android:textColor="@color/black_shade"
+                 style="@style/TextAppearance.AppCompat.Small"
+                 android:layout_gravity="bottom|center"
+                 android:layout_marginBottom="20dp"/>
+
+
+         </androidx.cardview.widget.CardView>
+
+         <androidx.cardview.widget.CardView
+             android:id="@+id/online_mostPlayed_songs"
+             android:layout_width="140dp"
+             android:layout_height="140dp"
+             android:layout_marginStart="8dp"
+             android:layout_below="@id/online_custom_songs"
+             android:layout_toRightOf="@id/online_favMusician_songs"
+             android:layout_marginTop="8dp"
+             app:cardBackgroundColor="#fff"
+             app:cardCornerRadius="10dp"
+             android:layout_marginLeft="8dp"
+             android:layout_toEndOf="@id/online_fav_songs">
+
+             <ImageView
+                 android:layout_width="wrap_content"
+                 android:layout_gravity="top|center"
+                 android:src="@drawable/most"
+                 android:layout_marginBottom="60dp"
+                 android:layout_height="wrap_content"
+                 android:contentDescription="@string/cards" />
+
+             <TextView
+                 android:id="@+id/onlineMostPlayedTitle"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_gravity="bottom|center"
+                 android:layout_marginBottom="40dp"
+                 android:gravity="center"
+                 android:text="@string/mostplayed_online"
+                 android:textColor="@color/black_shade"
+                 android:textStyle="bold" />
+             <TextView
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:text="@string/no_data"
+                 android:gravity="center"
+                 android:id="@+id/onlineMostPlayedCount"
+                 android:textColor="@color/black_shade"
+                 style="@style/TextAppearance.AppCompat.Small"
+                 android:layout_gravity="bottom|center"
+                 android:layout_marginBottom="20dp"/>
+
+
+         </androidx.cardview.widget.CardView>
+
+
+
+         <androidx.cardview.widget.CardView
+             android:id="@+id/online_saved_songs"
+             android:layout_width="140dp"
+             android:layout_height="140dp"
+             android:layout_marginStart="8dp"
+             android:layout_below="@id/online_favMusician_songs"
+             android:layout_marginTop="8dp"
+             app:cardBackgroundColor="#fff"
+             app:cardCornerRadius="10dp"
+             android:layout_marginLeft="8dp">
+
+             <ImageView
+                 android:layout_width="wrap_content"
+                 android:layout_gravity="top|center"
+                 android:src="@drawable/saved"
+                 android:layout_height="wrap_content"
+                 android:layout_marginBottom="60dp"
+                 android:contentDescription="@string/cards" />
+             <TextView
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:text="@string/saved_tracks"
+                 android:gravity="center"
+                 android:id="@+id/onlineSavedTitle"
+                 android:textStyle="bold"
+                 android:textColor="@color/black_shade"
+                 android:layout_gravity="bottom|center"
+                 android:layout_marginBottom="40dp"/>
+             <TextView
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:text="@string/no_data"
+                 android:gravity="center"
+                 android:id="@+id/onlineSavedCount"
+                 android:textColor="@color/black_shade"
+                 style="@style/TextAppearance.AppCompat.Small"
+                 android:layout_gravity="bottom|center"
+                 android:layout_marginBottom="20dp"/>
+
+
+         </androidx.cardview.widget.CardView>
+
+         <androidx.cardview.widget.CardView
+             android:id="@+id/online_lyrics_songs"
+             android:layout_width="140dp"
+             android:layout_height="140dp"
+             android:layout_marginStart="8dp"
+             android:layout_below="@id/online_mostPlayed_songs"
+             android:layout_toRightOf="@id/online_saved_songs"
+             android:layout_marginTop="8dp"
+             app:cardBackgroundColor="#fff"
+             app:cardCornerRadius="10dp"
+             android:layout_marginLeft="8dp"
+             android:layout_toEndOf="@id/online_saved_songs">
+
+             <ImageView
+                 android:layout_width="wrap_content"
+                 android:layout_gravity="top|center"
+                 android:src="@drawable/mlyrics"
+                 android:layout_marginBottom="60dp"
+                 android:layout_height="wrap_content"
+                 android:contentDescription="@string/cards" />
+
+             <TextView
+                 android:id="@+id/onlineLyricsTitle"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_gravity="bottom|center"
+                 android:layout_marginBottom="40dp"
+                 android:gravity="center"
+                 android:text="@string/saved_lyrics"
+                 android:textColor="@color/black_shade"
+                 android:textStyle="bold" />
+             <TextView
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:text="@string/no_data"
+                 android:gravity="center"
+                 android:id="@+id/onlineSavedLyricsCount"
+                 android:textColor="@color/black_shade"
+                 style="@style/TextAppearance.AppCompat.Small"
+                 android:layout_gravity="bottom|center"
+                 android:layout_marginBottom="20dp"/>
+
+
+         </androidx.cardview.widget.CardView>
+         <View
+             android:id="@+id/endDashboard"
+             android:layout_below="@id/online_saved_songs"
+             android:layout_width="match_parent"
+             android:layout_height="1dp"
+             android:layout_margin="10dp"
+             android:background="#ededed"
+             />
+         <TextView
+             android:layout_width="wrap_content"
+             android:layout_below="@id/endDashboard"
+             android:id="@+id/otherSettings"
+             android:layout_marginLeft="10dp"
+             android:text="@string/other_settings"
+             android:drawablePadding="10dp"
+             android:clickable="true"
+             android:padding="5dp"
+             android:textColor="#fff"
+             android:background="@drawable/smooth_back"
+             android:drawableLeft="@drawable/settings"
+             android:layout_height="wrap_content"
+             android:focusable="true"
+             android:layout_marginStart="10dp"
+             android:drawableStart="@drawable/settings" />
+     </RelativeLayout>
+ </androidx.core.widget.NestedScrollView>
+
+
+</RelativeLayout>

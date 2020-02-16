@@ -25,7 +25,7 @@ public class SliderAdapter extends PagerAdapter {
     private int[] slide_images = {
             R.mipmap.beat,
             R.mipmap.voice,
-            R.mipmap.read_lyrics
+            R.mipmap.lyrics
 
     };
     private String[] slide_headings = {

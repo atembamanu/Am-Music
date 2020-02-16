@@ -16,7 +16,7 @@
     <string name="skip">SKIP</string>
     <string name="continue_to_mList">continue</string>
     <string name="user_mBeater">WHAT SHOULD mBEATERS CALL YOU?</string>
-
+<string name="settings">My Dashboard</string>
     <string name="title_activity_music_list">Ngoma</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="app_title">Ngoma</string>
@@ -42,4 +42,17 @@
     <string name="album_art">Album Art</string>
     <string name="camila">Havana</string>
     <string name="camila_cabello">Camila Cabello</string>
+    <string name="account_info">Account info</string>
+    <string name="email">user.ngoma@gmail.com</string>
+    <string name="user_name">Ngoma User</string>
+    <string name="logout">Logout</string>
+    <string name="favourite_songs">Favourite Songs</string>
+    <string name="no_data">No Data</string>
+    <string name="cards">cards</string>
+    <string name="favourite_genres">Favourite Genres</string>
+    <string name="mostplayed_online">Most Played</string>
+    <string name="saved_tracks">Saved Tracks</string>
+    <string name="saved_lyrics">Saved Lyrics</string>
+    <string name="favourite_musician">Favourite Musician</string>
+    <string name="other_settings">Other Settings</string>
 </resources>

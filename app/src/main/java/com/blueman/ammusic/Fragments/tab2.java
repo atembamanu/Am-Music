@@ -50,8 +50,6 @@ public class tab2 extends Fragment {
     private void loadJSON() {
         MusixmatchApi client = MusixmatchClient.getClient();
         Call<TrackModel> call = client.getTracks(Constants.API_KEY, 1);
-
-
         call.enqueue(new Callback<TrackModel>() {
             @Override
             public void onResponse(Call<TrackModel> call, Response<TrackModel> response) {

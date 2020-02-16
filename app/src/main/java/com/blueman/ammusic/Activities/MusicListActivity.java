@@ -43,6 +43,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MusicListActivity extends AppCompatActivity implements tab3.OnFragmentInteractionListener, LocalTracksAdapter.OnLocalSongsListener, View.OnClickListener {
 
@@ -79,7 +80,7 @@ public class MusicListActivity extends AppCompatActivity implements tab3.OnFragm
     SlidingUpPanelLayout mLayout;
     private Context mContext;
     @BindView(R.id.share_app)
-    TextView share;
+    CircleImageView share;
     private static final boolean AUTO_HIDE = true;
     private static final int AUTO_HIDE_DELAY_MILLIS = 3000;
     private static final int UI_ANIMATION_DELAY = 400;
@@ -219,13 +220,9 @@ public class MusicListActivity extends AppCompatActivity implements tab3.OnFragm
 
     private void shareWithFriends() {
         share.setOnClickListener(v -> {
-            Intent sendIntent = new Intent();
-            sendIntent.setAction(Intent.ACTION_SEND);
-            sendIntent.putExtra(Intent.EXTRA_TEXT, "Still Negotiating, I'll reveal once ready!");
-            sendIntent.setType("text/plain");
-
-            Intent shareIntent = Intent.createChooser(sendIntent, null);
-            startActivity(shareIntent);
+            Intent intent = new Intent(this, UserSettingsActivity.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         });
     }
 
@@ -304,6 +301,7 @@ public class MusicListActivity extends AppCompatActivity implements tab3.OnFragm
         Uri uri = Uri.parse(path);
         Log.d(TAG, "onLocalSongsListener: " + uri.toString());
         mediaPlayer = MediaPlayer.create(MusicListActivity.this, uri);
+
         play.setVisibility(View.GONE);
         pause.setVisibility(View.VISIBLE);
         mediaPlayer.start();

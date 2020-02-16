@@ -15,14 +15,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <!--        <TextView-->
-        <!--            android:layout_centerInParent="true"-->
-        <!--            android:textSize="26sp"-->
-        <!--            android:text="Main Content"-->
-        <!--            android:textColor="@color/colorPrimary"-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="wrap_content" />-->
-
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -48,7 +40,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
 
-                <TextView
+                <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/share_app"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -56,10 +48,19 @@
                     android:layout_marginRight="48dp"
                     android:clickable="true"
                     android:focusable="true"
-                    android:drawableStart="@drawable/share"
-                    android:drawableLeft="@drawable/share"
+                    android:src="@drawable/user_"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="36dp"
+                    android:background="@color/colorTransparent"
+                    android:src="@drawable/mstatus_false"
+                    app:layout_constraintBottom_toBottomOf="@id/share_app"
+                    app:layout_constraintStart_toEndOf="@id/share_app"
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
             <LinearLayout

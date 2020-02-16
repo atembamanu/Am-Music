@@ -6,20 +6,15 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
-import com.blueman.ammusic.Activities.MusicListActivity;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.blueman.ammusic.Adapters.LocalTracksAdapter;
 import com.blueman.ammusic.Models.LocalAudioTracks;
 import com.blueman.ammusic.R;
@@ -33,12 +28,7 @@ public class tab3 extends Fragment {
     private RecyclerView recyclerView;
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    private Context mContext;
 
-    private String mParam1;
-    private String mParam2;
-
-    private List<LocalAudioTracks> musicFound;
     private OnFragmentInteractionListener mListener;
     private LocalTracksAdapter.OnLocalSongsListener localSongsListener;
 
@@ -61,8 +51,8 @@ public class tab3 extends Fragment {
         new GetUserSongs().execute();
 
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            String mParam1 = getArguments().getString(ARG_PARAM1);
+            String mParam2 = getArguments().getString(ARG_PARAM2);
 
         }
 
@@ -121,8 +111,7 @@ public class tab3 extends Fragment {
         @Override
         protected void onPostExecute(List<LocalAudioTracks> localAudioTracks) {
             super.onPostExecute(localAudioTracks);
-            musicFound = localAudioTracks;
-            LocalTracksAdapter localTracksAdapter = new LocalTracksAdapter(getContext(), musicFound, localSongsListener);
+            LocalTracksAdapter localTracksAdapter = new LocalTracksAdapter(getContext(), localAudioTracks, localSongsListener);
             recyclerView.setAdapter(localTracksAdapter);
         }
 
