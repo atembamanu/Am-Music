@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "336665145129",
+    "firebase_url": "https://am-music-e8876.firebaseio.com",
+    "project_id": "am-music-e8876",
+    "storage_bucket": "am-music-e8876.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:336665145129:android:0c82f0bd8e0a2a9028d138",
+        "android_client_info": {
+          "package_name": "com.blueman.ammusic"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "336665145129-fbn6883unddh2ahuu29f7vn0cbv8986c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.blueman.ammusic",
+            "certificate_hash": "fb65663d81f272db0cc95be734aff1504f3fe94e"
+          }
+        },
+        {
+          "client_id": "336665145129-f30f003s2af6n2q1j4i2mlln0vdlcbr3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_yPb2Unuw9NoLt24dTtPB-hx2prrxIOo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "336665145129-f30f003s2af6n2q1j4i2mlln0vdlcbr3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

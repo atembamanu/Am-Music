@@ -16,7 +16,7 @@
     <string name="skip">SKIP</string>
     <string name="continue_to_mList">continue</string>
     <string name="user_mBeater">WHAT SHOULD mBEATERS CALL YOU?</string>
-<string name="settings">My Dashboard</string>
+    <string name="settings">My Dashboard</string>
     <string name="title_activity_music_list">Ngoma</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="app_title">Ngoma</string>
@@ -55,4 +55,15 @@
     <string name="saved_lyrics">Saved Lyrics</string>
     <string name="favourite_musician">Favourite Musician</string>
     <string name="other_settings">Other Settings</string>
+    <string name="title_activity_login">Sign in</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="login">LOGIN</string>
+    <string name="register">REGISTER</string>
 </resources>

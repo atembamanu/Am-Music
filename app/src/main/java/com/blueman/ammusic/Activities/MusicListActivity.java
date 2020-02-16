@@ -2,7 +2,6 @@ package com.blueman.ammusic.Activities;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
@@ -36,8 +35,6 @@ import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.single.PermissionListener;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
-
-import org.parceler.Parcels;
 
 import java.util.List;
 
@@ -140,7 +137,7 @@ public class MusicListActivity extends AppCompatActivity implements tab3.OnFragm
         setContentView(R.layout.activity_music_list);
         ButterKnife.bind(this);
         externalStoragePermission();
-        shareWithFriends();
+        checkUserLoginStatus();
 
         mVisible = true;
         mControlsView = findViewById(R.id.fullscreen_content_controls);
@@ -218,9 +215,9 @@ public class MusicListActivity extends AppCompatActivity implements tab3.OnFragm
                 }).check();
     }
 
-    private void shareWithFriends() {
+    private void checkUserLoginStatus() {
         share.setOnClickListener(v -> {
-            Intent intent = new Intent(this, UserSettingsActivity.class);
+            Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         });
