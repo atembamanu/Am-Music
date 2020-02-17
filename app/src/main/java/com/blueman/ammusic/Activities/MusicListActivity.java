@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
@@ -308,7 +309,20 @@ public class MusicListActivity extends AppCompatActivity implements tab3.OnFragm
                 (mLayout.getPanelState() == SlidingUpPanelLayout.PanelState.EXPANDED || mLayout.getPanelState() == SlidingUpPanelLayout.PanelState.ANCHORED)) {
             mLayout.setPanelState(SlidingUpPanelLayout.PanelState.COLLAPSED);
         } else {
-            super.onBackPressed();
+            AlertDialog.Builder builder = new AlertDialog.Builder(MusicListActivity.this);
+            builder.setMessage("Are sure you want to exit Ngoma Music App")
+                    .setTitle("Ngoma Music App");
+            builder.setPositiveButton(R.string.ok, (dialog, id) -> {
+                // User clicked OK button
+                this.finishAffinity();
+            });
+            builder.setNegativeButton(R.string.cancel, (dialog, id) -> {
+                // User cancelled the dialog
+                dialog.cancel();
+            });
+            AlertDialog dialog = builder.create();
+            dialog.show();
+
         }
     }
 
@@ -411,4 +425,6 @@ public class MusicListActivity extends AppCompatActivity implements tab3.OnFragm
 
         }
     }
+
+
 }

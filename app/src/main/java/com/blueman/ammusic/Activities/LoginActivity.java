@@ -59,27 +59,29 @@ public class LoginActivity extends AppCompatActivity {
         email = userEmail.getText().toString();
         password =userPassword.getText().toString();
 
-       if (TextUtils.isEmpty(email))
-            userEmail.setError("Email is required");
-       if(TextUtils.isEmpty(password))
+       if (TextUtils.isEmpty(email)) {
+           userEmail.setError("Email is required");
+       }
+       else if(TextUtils.isEmpty(password)) {
            userPassword.setError("Password is required");
-
-       mAuth.signInWithEmailAndPassword(email, password)
-               .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                   @Override
-                   public void onComplete(@NonNull Task<AuthResult> task) {
-                       if (task.isSuccessful()){
-                           Log.d(TAG, "SIGNIN SUCCESS");
-                           Toast.makeText(LoginActivity.this, "Sucess..", Toast.LENGTH_SHORT).show();
-                           Intent intent = new Intent(LoginActivity.this, UserSettingsActivity.class);
-                           startActivity(intent);
-                       }else{
-                           Log.w(TAG, "signInWithEmail:failure", task.getException());
-                           Toast.makeText(LoginActivity.this, "Authentication failed. Try again",
-                                   Toast.LENGTH_SHORT).show();
+       }else {
+           mAuth.signInWithEmailAndPassword(email, password)
+                   .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                       @Override
+                       public void onComplete(@NonNull Task<AuthResult> task) {
+                           if (task.isSuccessful()) {
+                               Log.d(TAG, "SIGNIN SUCCESS");
+                               Toast.makeText(LoginActivity.this, "Sucess..", Toast.LENGTH_SHORT).show();
+                               Intent intent = new Intent(LoginActivity.this, UserSettingsActivity.class);
+                               startActivity(intent);
+                           } else {
+                               Log.w(TAG, "signInWithEmail:failure", task.getException());
+                               Toast.makeText(LoginActivity.this, "Authentication failed. Try again",
+                                       Toast.LENGTH_SHORT).show();
+                           }
                        }
-                   }
-               });
+                   });
+       }
     }
 
 

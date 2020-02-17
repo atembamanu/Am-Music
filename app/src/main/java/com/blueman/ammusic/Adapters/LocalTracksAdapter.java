@@ -85,7 +85,6 @@ public class LocalTracksAdapter extends RecyclerView.Adapter<LocalTracksAdapter.
                         }
                         filteredTracks = filteredList;
                     }
-
                 }
                 FilterResults results = new FilterResults();
                 results.values = filteredTracks;
