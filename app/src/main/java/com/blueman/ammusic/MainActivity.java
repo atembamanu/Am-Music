@@ -3,7 +3,9 @@ package com.blueman.ammusic;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
@@ -14,6 +16,8 @@ import android.widget.TextView;
 import com.blueman.ammusic.Activities.MusicListActivity;
 import com.blueman.ammusic.Activities.MusicPreferenceActivity;
 import com.blueman.ammusic.Adapters.SliderAdapter;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -29,11 +33,14 @@ public class MainActivity extends AppCompatActivity {
     private int mCurrentPage;
 
     private SliderAdapter sliderAdapter;
+    FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        isFirstRun();
         setContentView(R.layout.activity_main);
+        mAuth = FirebaseAuth.getInstance();
 
 
         sliderAdapter = new SliderAdapter(this);
@@ -49,6 +56,20 @@ public class MainActivity extends AppCompatActivity {
         mNextBtn.setOnClickListener(v -> mSlideViewPager.setCurrentItem(mCurrentPage+1));
 
         mBackBtn.setOnClickListener(v -> mSlideViewPager.setCurrentItem(mCurrentPage - 1));
+    }
+
+    private void isFirstRun() {
+        super.onStart();
+        SharedPreferences sharedPreferences = getSharedPreferences("main_file", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        boolean firstRun = sharedPreferences.getBoolean("first_run", true);
+        if(firstRun){
+            editor.putBoolean("first_run", false);
+            editor.apply();
+        }else {
+            Intent intent = new Intent(this, MusicListActivity.class);
+            startActivity(intent);
+        }
     }
 
 
@@ -119,4 +140,5 @@ public class MainActivity extends AppCompatActivity {
 
         }
     };
+
 }

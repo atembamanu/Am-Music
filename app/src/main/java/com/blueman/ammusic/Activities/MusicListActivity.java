@@ -28,6 +28,8 @@ import com.blueman.ammusic.R;
 import com.blueman.ammusic.Utils.LocalSharedPreferences;
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionDeniedResponse;
@@ -78,6 +80,11 @@ public class MusicListActivity extends AppCompatActivity implements tab3.OnFragm
     private Context mContext;
     @BindView(R.id.share_app)
     CircleImageView share;
+
+    @BindView(R.id.loginStatus)
+    ImageButton loginStatus;
+
+    FirebaseAuth mAuth;
     private static final boolean AUTO_HIDE = true;
     private static final int AUTO_HIDE_DELAY_MILLIS = 3000;
     private static final int UI_ANIMATION_DELAY = 400;
@@ -167,6 +174,9 @@ public class MusicListActivity extends AppCompatActivity implements tab3.OnFragm
         pagerAdapter = new MusicTabsAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(pagerAdapter);
 
+
+        mAuth = FirebaseAuth.getInstance();
+
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -214,12 +224,33 @@ public class MusicListActivity extends AppCompatActivity implements tab3.OnFragm
                     }
                 }).check();
     }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        FirebaseUser user = mAuth.getCurrentUser();
+        updateUI(user);
+    }
+
+    private void updateUI(FirebaseUser user) {
+        if(user != null){
+            loginStatus.setImageResource(R.drawable.mstatus_true);
+        }
+    }
 
     private void checkUserLoginStatus() {
         share.setOnClickListener(v -> {
-            Intent intent = new Intent(this, LoginActivity.class);
-            startActivity(intent);
-            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+
+            FirebaseUser user = mAuth.getCurrentUser();
+            if (user != null){
+                Intent intent = new Intent(this, UserSettingsActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+            }else{
+                Intent intent = new Intent(this, LoginActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+            }
+
         });
     }
 
