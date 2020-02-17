@@ -7,6 +7,8 @@ import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
 
@@ -20,11 +22,13 @@ import com.blueman.ammusic.Utils.LocalSharedPreferences;
 
 import org.parceler.Parcels;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class LocalTracksAdapter extends RecyclerView.Adapter<LocalTracksAdapter.LocalTrackViewHolder> {
+public class LocalTracksAdapter extends RecyclerView.Adapter<LocalTracksAdapter.LocalTrackViewHolder> implements Filterable {
 
     private List<LocalAudioTracks> localAudioTracks;
+    private List<LocalAudioTracks> filteredTracks;
     private Context mContext;
     private OnLocalSongsListener listener;
     private LayoutInflater inflater;
@@ -41,6 +45,7 @@ public class LocalTracksAdapter extends RecyclerView.Adapter<LocalTracksAdapter.
         this.listener = listener;
         inflater = LayoutInflater.from(mContext);
         localSharedPreferences = new LocalSharedPreferences();
+        this.filteredTracks = localAudioTracks;
     }
 
     @NonNull
@@ -53,15 +58,46 @@ public class LocalTracksAdapter extends RecyclerView.Adapter<LocalTracksAdapter.
     @Override
     public void onBindViewHolder(@NonNull LocalTrackViewHolder holder, int position) {
 
-        holder.localSongName.setText(localAudioTracks.get(position).getName());
-        holder.localArtist.setText(localAudioTracks.get(position).gtaArtist());
+        holder.localSongName.setText(filteredTracks.get(position).getName());
+        holder.localArtist.setText(filteredTracks.get(position).gtaArtist());
 
         localSharedPreferences.addSong(mContext, localAudioTracks.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return localAudioTracks.size();
+        return filteredTracks.size();
+    }
+
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                String charSequenceString = constraint.toString();
+                if (charSequenceString.isEmpty()) {
+                    filteredTracks = localAudioTracks;
+                } else {
+                    List<LocalAudioTracks> filteredList = new ArrayList<>();
+                    for (LocalAudioTracks tracks : localAudioTracks) {
+                        if (tracks.getName().toLowerCase().contains(charSequenceString.toLowerCase())) {
+                            filteredList.add(tracks);
+                        }
+                        filteredTracks = filteredList;
+                    }
+
+                }
+                FilterResults results = new FilterResults();
+                results.values = filteredTracks;
+                return results;
+            }
+
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                filteredTracks = (List<LocalAudioTracks>) results.values;
+                notifyDataSetChanged();
+            }
+        };
     }
 
     public class LocalTrackViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {

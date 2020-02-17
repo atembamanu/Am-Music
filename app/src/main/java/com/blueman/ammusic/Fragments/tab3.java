@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -26,6 +27,8 @@ import java.util.Objects;
 public class tab3 extends Fragment {
 
     private RecyclerView recyclerView;
+    private SearchView searchView;
+    private  LocalTracksAdapter localTracksAdapter;
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -42,27 +45,42 @@ public class tab3 extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+
         View view = inflater.inflate(R.layout.fragment_tab3, container, false);
         recyclerView = view.findViewById(R.id.localRecyclerView);
 
+        searchView = view.findViewById(R.id.search_view);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
 
-        new GetUserSongs().execute();
-
+        List<LocalAudioTracks> tracks = getSongs();
+        LocalTracksAdapter localTracksAdapter = new LocalTracksAdapter(getContext(), tracks, localSongsListener);
+        recyclerView.setAdapter(localTracksAdapter);
         if (getArguments() != null) {
             String mParam1 = getArguments().getString(ARG_PARAM1);
             String mParam2 = getArguments().getString(ARG_PARAM2);
 
         }
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                localTracksAdapter.getFilter().filter(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                localTracksAdapter.getFilter().filter(newText);
+                return false;
+            }
+        });
 
         return view;
     }
-    private class GetUserSongs extends AsyncTask< Void, Integer, List<LocalAudioTracks>>{
 
-        @Override
-        protected List<LocalAudioTracks> doInBackground(Void... voids) {
-            List<LocalAudioTracks> tempAudioList = new ArrayList<>();
+    private    List<LocalAudioTracks> getSongs(){
+        List<LocalAudioTracks> tempAudioList = new ArrayList<>();
         ContentResolver contentResolver = Objects.requireNonNull(getActivity()).getContentResolver();
         Uri uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
         Cursor c = contentResolver.query(uri, null, null, null, null);
@@ -101,25 +119,30 @@ public class tab3 extends Fragment {
         }
 
         return  tempAudioList;
-        }
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
-
-        @Override
-        protected void onPostExecute(List<LocalAudioTracks> localAudioTracks) {
-            super.onPostExecute(localAudioTracks);
-            LocalTracksAdapter localTracksAdapter = new LocalTracksAdapter(getContext(), localAudioTracks, localSongsListener);
-            recyclerView.setAdapter(localTracksAdapter);
-        }
-
-        @Override
-        protected void onProgressUpdate(Integer... values) {
-            super.onProgressUpdate(values);
-        }
     }
+//    private class GetUserSongs extends AsyncTask< Void, Integer, List<LocalAudioTracks>>{
+//
+//        @Override
+//        protected List<LocalAudioTracks> doInBackground(Void... voids) {
+//         return l
+//        }
+//
+//        @Override
+//        protected void onPreExecute() {
+//            super.onPreExecute();
+//        }
+//
+//        @Override
+//        protected void onPostExecute(List<LocalAudioTracks> localAudioTracks) {
+//            super.onPostExecute(localAudioTracks);
+//
+//        }
+//
+//        @Override
+//        protected void onProgressUpdate(Integer... values) {
+//            super.onProgressUpdate(values);
+//        }
+//    }
 
     @Override
     public void onAttach(Context context) {
