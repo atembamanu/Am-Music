@@ -1,19 +1,17 @@
 package com.blueman.ammusic.Activities;
 
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
-import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.blueman.ammusic.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -56,10 +54,22 @@ public class UserSettingsActivity extends AppCompatActivity {
     }
 
     private void logOutUser() {
-        mAuth.signOut();
-        updateUI(null);
-        Intent intent = new Intent(this, MusicListActivity.class);
-        startActivity(intent);
+        AlertDialog.Builder builder = new AlertDialog.Builder(UserSettingsActivity.this);
+        builder.setMessage(R.string.dialog_message)
+                .setTitle(R.string.dialog_title);
+        builder.setPositiveButton(R.string.ok, (dialog, id) -> {
+            // User clicked OK button
+            mAuth.signOut();
+            updateUI(null);
+            Intent intent = new Intent(UserSettingsActivity.this, MusicListActivity.class);
+            startActivity(intent);
+        });
+        builder.setNegativeButton(R.string.cancel, (dialog, id) -> {
+            // User cancelled the dialog
+            dialog.cancel();
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
     @Override

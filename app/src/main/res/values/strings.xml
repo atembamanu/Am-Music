@@ -66,4 +66,8 @@
     <string name="login_failed">"Login failed"</string>
     <string name="login">LOGIN</string>
     <string name="register">REGISTER</string>
+    <string name="dialog_message">Are you sure you want to logout?</string>
+    <string name="dialog_title">Ngoma</string>
+    <string name="ok">YES</string>
+    <string name="cancel">NO</string>
 </resources>
