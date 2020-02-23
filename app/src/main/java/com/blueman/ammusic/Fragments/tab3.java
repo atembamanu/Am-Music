@@ -51,12 +51,18 @@ public class tab3 extends Fragment {
         recyclerView = view.findViewById(R.id.localRecyclerView);
 
         searchView = view.findViewById(R.id.search_view);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
-        recyclerView.setLayoutManager(layoutManager);
-
         List<LocalAudioTracks> tracks = getSongs();
         LocalTracksAdapter localTracksAdapter = new LocalTracksAdapter(getContext(), tracks, localSongsListener);
         recyclerView.setAdapter(localTracksAdapter);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setItemViewCacheSize(20);
+        recyclerView.setDrawingCacheEnabled(true);
+        recyclerView.setNestedScrollingEnabled(true);
+        recyclerView.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
+
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(layoutManager);
+
         if (getArguments() != null) {
             String mParam1 = getArguments().getString(ARG_PARAM1);
             String mParam2 = getArguments().getString(ARG_PARAM2);
