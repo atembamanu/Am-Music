@@ -34,7 +34,7 @@
                     android:gravity="top"
                     android:keepScreenOn="true"
                     android:padding="10dp"
-                    android:src="@mipmap/beat"
+                    android:src="@drawable/beat"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -127,7 +127,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:src="@mipmap/final_search"
+                    android:src="@drawable/final_search"
                     android:visibility="gone"
                     android:contentDescription="@string/music" />
 

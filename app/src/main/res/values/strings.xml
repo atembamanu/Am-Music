@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Ngoma</string>
+    <string name="app_name" translatable="false">Ngoma</string>
     <string name="select_your_music_preferences">Select your music preferences</string>
     <string name="gospel">Gospel</string>
     <string name="reggae">Reggae</string>

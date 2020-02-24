@@ -4,7 +4,7 @@
     <item>
         <bitmap
             android:alpha="0.3"
-            android:src="@mipmap/back_music"
+            android:src="@drawable/back_music"
             android:gravity="fill">
 
         </bitmap>
